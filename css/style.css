@@ -1,0 +1,69 @@
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{margin:0}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}
+audio,canvas,progress,video{display:inline-block;vertical-align:baseline}
+audio:not([controls]){display:none;height:0}[hidden],template{display:none}
+a{background-color:transparent}
+a:active,a:hover{outline:0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:bold}
+dfn{font-style:italic}
+h1{font-size:2em;margin:0.67em 0}
+mark{background:#ff0;color:#000}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-0.5em}
+sub{bottom:-0.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:1em 40px}
+hr{box-sizing:content-box;height:0}
+pre{overflow:auto}
+code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}
+button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}
+button{overflow:visible}
+button,select{text-transform:none}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+input{line-height:normal}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
+input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}
+input[type="search"]{-webkit-appearance:textfield;box-sizing:content-box}
+input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em}
+legend{border:0;padding:0}
+textarea{overflow:auto}
+optgroup{font-weight:bold}
+table{border-collapse:collapse;border-spacing:0}
+td,th{padding:0}
+html{color:#222;font-size:1em;line-height:1.4;font-family:Source Code Pro,helvetica}::-moz-selection{background:#b3d4fc;text-shadow:none}::selection{background:#b3d4fc;text-shadow:none}
+hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
+audio,canvas,iframe,img,svg,video{vertical-align:middle}
+fieldset{border:0;margin:0;padding:0}
+textarea{resize:vertical}.browserupgrade{margin:0.2em 0;background:#ccc;color:#000;padding:0.2em 0}
+body{background:#000;display:flex;flex-direction:row;color:white;justify-content:space-between;padding:64px;align-items:center;height:100vh;box-sizing:border-box;font-size:0.9em}
+a{text-decoration:none;color:white}
+a:hover{text-decoration:underline}
+p{margin:0;line-height:24px}.content p:first-child{line-height:40px}.contact-links{text-align:right;flex-direction:row-reverse;align-self:flex-end;flex:1;justify-content:flex-start}.contact-links>*{margin:8px;display:inline}.hidden{display:none!important}.visuallyhidden{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.visuallyhidden.focusable:active,.visuallyhidden.focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}.invisible{visibility:hidden}.clearfix:before,.clearfix:after{content:" ";display:table}.clearfix:after{clear:both}
+@media only screen and(max-width:60em){body{flex-direction:column;padding:24px 32px;height:100vh}.content{align-self:flex-start;flex:1}.contact-links{flex:0}}
+@media only screen and(max-width:45em){.contact-links{flex-direction:column}.contact-links*{display:flex;justify-content:flex-end}}
+@media print,(-webkit-min-device-pixel-ratio:1.25),(min-resolution:1.25dppx),(min-resolution:120dpi){}
+@media print{*,*:before,*:after,*:first-letter,*:first-line{background:transparent!important;color:#000!important;box-shadow:none!important;text-shadow:none!important}
+a,a:visited{text-decoration:underline}
+a[href]:after{content:" (" attr(href)")"}
+abbr[title]:after{content:" (" attr(title)")"}
+a[href^="#"]:after,a[href^="javascript:"]:after{content:""}
+pre,blockquote{border:1px solid #999;page-break-inside:avoid}
+thead{display:table-header-group}
+tr,img{page-break-inside:avoid}
+img{max-width:100%!important}
+p,h2,h3{orphans:3;widows:3}
+h2,h3{page-break-after:avoid}}
+@font-face{font-family:'Source Code Pro';src:url('../fonts/SourceCodePro-Semibold.eot');src:url('../fonts/SourceCodePro-Semibold.eot?#iefix')format('embedded-opentype'),url('../fonts/SourceCodePro-Semibold.woff2')format('woff2'),url('../fonts/SourceCodePro-Semibold.woff')format('woff'),url('../fonts/SourceCodePro-Semibold.ttf')format('truetype');font-weight:600;font-style:normal}
+@font-face{font-family:'Source Code Pro';src:url('../fonts/SourceCodePro-Bold.eot');src:url('../fonts/SourceCodePro-Bold.eot?#iefix')format('embedded-opentype'),url('../fonts/SourceCodePro-Bold.woff2')format('woff2'),url('../fonts/SourceCodePro-Bold.woff')format('woff'),url('../fonts/SourceCodePro-Bold.ttf')format('truetype');font-weight:bold;font-style:normal}
+@font-face{font-family:'Source Code Pro';src:url('../fonts/SourceCodePro-Regular.eot');src:url('../fonts/SourceCodePro-Regular.eot?#iefix')format('embedded-opentype'),url('../fonts/SourceCodePro-Regular.woff2')format('woff2'),url('../fonts/SourceCodePro-Regular.woff')format('woff'),url('../fonts/SourceCodePro-Regular.ttf')format('truetype');font-weight:normal;font-style:normal}
+@font-face{font-family:'Source Code Pro';src:url('../fonts/SourceCodePro-ExtraLight.eot');src:url('../fonts/SourceCodePro-ExtraLight.eot?#iefix')format('embedded-opentype'),url('../fonts/SourceCodePro-ExtraLight.woff2')format('woff2'),url('../fonts/SourceCodePro-ExtraLight.woff')format('woff'),url('../fonts/SourceCodePro-ExtraLight.ttf')format('truetype');font-weight:200;font-style:normal}
+@font-face{font-family:'Source Code Pro';src:url('../fonts/SourceCodePro-Medium.eot');src:url('../fonts/SourceCodePro-Medium.eot?#iefix')format('embedded-opentype'),url('../fonts/SourceCodePro-Medium.woff2')format('woff2'),url('../fonts/SourceCodePro-Medium.woff')format('woff'),url('../fonts/SourceCodePro-Medium.ttf')format('truetype');font-weight:500;font-style:normal}
+@font-face{font-family:'Source Code Pro';src:url('../fonts/SourceCodePro-Black.eot');src:url('../fonts/SourceCodePro-Black.eot?#iefix')format('embedded-opentype'),url('../fonts/SourceCodePro-Black.woff2')format('woff2'),url('../fonts/SourceCodePro-Black.woff')format('woff'),url('../fonts/SourceCodePro-Black.ttf')format('truetype');font-weight:900;font-style:normal}
+@font-face{font-family:'Source Code Pro';src:url('../fonts/SourceCodePro-Light.eot');src:url('../fonts/SourceCodePro-Light.eot?#iefix')format('embedded-opentype'),url('../fonts/SourceCodePro-Light.woff2')format('woff2'),url('../fonts/SourceCodePro-Light.woff')format('woff'),url('../fonts/SourceCodePro-Light.ttf')format('truetype');font-weight:300;font-style:normal}
