@@ -650,7 +650,7 @@ p{
    Modify as content requires.
    ========================================================================== */
 
-@media only screen and (max-width: 60em) {
+@media only screen and (max-width: 50em) {
     body{
         flex-direction: column;
         padding: 24px 32px;
@@ -665,16 +665,16 @@ p{
     .contact-links{
         flex: 0;
     }
-}
 
-@media only screen and (max-width: 45em) {
     .contact-links{
         flex-direction: column;
     }
+    
     .contact-links * {
         display: flex;
         justify-content: flex-end;
     }
+
 }
 
 @media print,
