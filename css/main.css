@@ -93,7 +93,7 @@ textarea {
 }
 
 body{
-    background: rgba(0, 0, 0, 0.88);
+    background: #000;
     display: flex;
     flex-direction: row;
     color: white;
@@ -133,7 +133,7 @@ p{
 }
 
 .contact-links > *{
-    margin: 0 12px;
+    margin: 8px;
     display: inline;
 }
 
@@ -232,6 +232,16 @@ p{
 
     .contact-links{
         flex: 0;
+    }
+}
+
+@media only screen and (max-width: 45em) {
+    .contact-links{
+        flex-direction: column;
+    }
+    .contact-links * {
+        display: flex;
+        justify-content: flex-end;
     }
 }
 
