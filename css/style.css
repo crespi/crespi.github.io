@@ -556,7 +556,7 @@ h1{
 .container{
     display: flex;
     flex-direction: row;
-    padding: 64px;
+    padding: 52px 64px;
     height: 100vh;
     box-sizing: border-box;
 }
