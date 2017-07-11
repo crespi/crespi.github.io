@@ -524,6 +524,7 @@ textarea {
     padding: 0.2em 0;
 }
 
+/* General */
 body{
     background: #000;
     color: white;
@@ -553,6 +554,8 @@ h1{
     margin: 12px 0;
 }
 
+/* Layout */
+
 .container{
     display: flex;
     flex-direction: row;
@@ -565,7 +568,6 @@ h1{
     display: flex;
     flex: 1;
 }
-
 
 .contact-links-wrapper ul{
   list-style-type: none;
@@ -585,6 +587,7 @@ h1{
   display: flex;
   flex-direction: column;
   flex: 1;
+  justify-content: center;
 }
 
 @media only screen and (max-width: 60em) {
