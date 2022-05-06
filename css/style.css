@@ -558,11 +558,12 @@ h1 {
 #shots a{
     margin: 24px 0;
     width: 48%;
+    border-radius: 8px;
+
 }
 
 #shots a img{
     width: 100%;
-    border-radius: 8px;
 }
 
 .hero, .about {
