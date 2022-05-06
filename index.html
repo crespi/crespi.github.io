@@ -37,9 +37,16 @@
             success: function(data) {  
             if (data.length > 0) { 
                 $.each(data.reverse(), function(i, val) {                
-                $('#shots').prepend(
-                    '<a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img src="'+ val.images.hidpi +'"/></a>'
-                    )
+                    if(val.video){
+                        console.log(val.video.large_preview_url)
+                        $('#shots').prepend(
+                            '<a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"> <video autoplay muted loop width="100%"> <source src= '+val.video.xlarge_preview_url+' type="video/mp4"></video></a>'
+                        )
+                    } else {
+                    $('#shots').prepend(
+                        '<a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img src="'+ val.images.hidpi +'"/></a>'
+                        )
+                    }
                 })
             }
             else {
