@@ -40,7 +40,7 @@
                     if(val.video){
                         console.log(val.video.large_preview_url)
                         $('#shots').prepend(
-                            '<a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"> <video autoplay muted loop width="100%"> <source src= '+val.video.xlarge_preview_url+' type="video/mp4"></video></a>'
+                            '<a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"> <video autoplay="autoplay" muted loop width="100%"> <source src='+val.video.xlarge_preview_url+' type="video/mp4"></video></a>'
                         )
                     } else {
                     $('#shots').prepend(
@@ -83,8 +83,8 @@
                 <li class="animated-link">
                     <a href="https://www.linkedin.com/in/franciscocrespi/">LinkedIn</a>
                 </li>
-                <li>
-                    <p>crespi.f@gmail.com</p>
+                <li class="animated-link">
+                    <a href="mailto:crespi.f@gmail.com">crespi.f@gmail.com</a>
                 </li>
             </ul>
         </div>

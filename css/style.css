@@ -535,13 +535,13 @@ h1 {
     animation: fadein 1s;
 }
 .contact-links-wrapper ul {
+    display: flex;
     list-style-type: none;
     text-align: right;
-    display: flex;
-    flex: 1;
     padding: 0;
     align-items: flex-end;
     justify-content: flex-end;
+    flex-wrap: wrap;
 }
 .contact-links-wrapper ul li {
     margin: 12px;
@@ -602,10 +602,6 @@ h1 {
         width: 80vw;
         padding: 0 16px;
         margin-top: 10vh;
-    }
-
-    .contact-links-wrapper ul {
-        flex-direction: column;
     }
 
     .contact-links-wrapper {
