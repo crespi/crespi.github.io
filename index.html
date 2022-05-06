@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="css/style.css">
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <!-- Hotjar Tracking Code for https://crespi.design -->
     <script>
         (function(h,o,t,j,a,r){
@@ -24,14 +25,40 @@
             r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
             a.appendChild(r);
         })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+
+        // Set the Access Token
+        var accessToken = 'b6345a2060e96a5762c657e47777eb8b93f49c1bd3490b453ffb05c3b05d89a0';
+
+        // Call Dribble v2 API
+        $.ajax({
+            url: 'https://api.dribbble.com/v2/user/shots?access_token='+accessToken,
+            dataType: 'json',
+            type: 'GET',
+            success: function(data) {  
+            if (data.length > 0) { 
+                $.each(data.reverse(), function(i, val) {                
+                $('#shots').prepend(
+                    '<a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img src="'+ val.images.hidpi +'"/></a>'
+                    )
+                })
+            }
+            else {
+                $('#shots').append('<p>No shots yet!</p>');
+            }
+            }
+        });
     </script>
 </head>
 
 <body>
     <div class="container">
-        <div class="content-wrapper">
+        <div class="hero">
             <h1>Francisco Crespi</h1>
-            <p>I am a Freelance Product Designer based in Barcelona. Also, I am a UI tutor and mentor at CareerFoundry, where I help new designers take their first steps into the digital product design industry.</p>
+            <p>Freelance product designer based in Barcelona. Also, I am a UI tutor and mentor at CareerFoundry, where I help new designers take their first steps into the digital product design industry.</p>
+        </div>
+        <div id="shots"></div>
+        <div class="about">
+            <h1>About</h1>
             <p>Previously I was Head of Design at <a class="animated-link" href="https://muun.com">Muun,</a> where I helped build and launch a self-custodial Bitcoin wallet for <a class="animated-link" href="https://play.google.com/store/apps/details?id=io.muun.apollo">Android</a> and <a class="animated-link" href="https://apps.apple.com/app/id1482037683">iOS</a>.</p>
             <p>I hold a MSc. in Cognitive Systems and Interactive Media at <a class="animated-link" href="https://upf.edu/csim">Universitat Pompeu Fabra.</a></p>
         </div>
@@ -54,6 +81,7 @@
                 </li>
             </ul>
         </div>
+        
     </div>
 
     <script src="js/plugins.js"></script>
