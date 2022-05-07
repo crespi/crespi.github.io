@@ -598,7 +598,7 @@ h1 {
         flex-direction: column;
         padding: 32px;
     }
-    .hero{
+    .hero .about{
         width: 80vw;
         padding: 0 16px;
         margin-top: 10vh;
