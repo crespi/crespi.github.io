@@ -568,7 +568,7 @@ h1 {
 
 .hero, .about {
     display: flex;
-    height: 80vh;
+    margin-top: 25vh;
     width: 40vw;
     flex-direction: column;
     padding: 0 48px;
@@ -598,7 +598,7 @@ h1 {
         flex-direction: column;
         padding: 32px;
     }
-    .hero .about{
+    .hero, .about{
         width: 80vw;
         padding: 0 16px;
         margin-top: 10vh;
