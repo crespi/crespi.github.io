@@ -569,6 +569,7 @@ h1 {
 .hero, .about {
     display: flex;
     margin-top: 25vh;
+    margin-bottom: 25vh;
     width: 40vw;
     flex-direction: column;
     padding: 0 48px;
