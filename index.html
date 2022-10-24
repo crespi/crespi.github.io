@@ -79,6 +79,7 @@
             <p>In my free time I create <a class="animated-link" target="_blank" href="https://instagram.com/crespivis">abstract 3D animations</a> and play them live as a VJ in parties or live shows.</p>
         </div>
         <header-component></header-component>  
+        <footer-component></footer-component>
     </div>
 
 
@@ -86,8 +87,7 @@
     <script src="js/description.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/header.js"></script>
-    <script src="js/button.js"></script>
-
+    <script src="js/footer.js"></script>
 
 
     <script>
@@ -100,6 +100,11 @@
 
         ga('create', 'UA-66403735-3', 'auto');
         ga('send', 'pageview');
+
+
+        // Place year in footer
+        document.getElementById("year").innerHTML = new Date().getFullYear();
+
     </script>
 </body>
 
