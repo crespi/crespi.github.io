@@ -15,7 +15,6 @@ class NavigationComponent extends HTMLElement{
                 }
 
                 .nav-wrapper{
-                    width: 100%;
                     display: flex;
                     justify-content: space-between;
                     flex: 1;
