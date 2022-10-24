@@ -1,6 +1,7 @@
 :root {
     --background: #141516;
-    --background-transparent: #14151600;
+    --background-transparent: rgba(20,21,22,.3);
+    --blur-value: blur(8px);
   }
 
 
@@ -543,7 +544,7 @@ h1 {
     display: flex;
     margin-top: 25vh;
     margin-bottom: 25vh;
-    width: 40vw;
+    width: 33vw;
     flex-direction: column;
     justify-content: center;
     
@@ -574,7 +575,7 @@ h1 {
     .hero, .about{
         width: 90vw;
         padding: 0;
-        margin-top: 10vh;
+        margin-top: 20vh;
     }
 
     .contact-links-wrapper {

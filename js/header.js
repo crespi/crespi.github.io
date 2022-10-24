@@ -23,8 +23,8 @@ class NavigationComponent extends HTMLElement{
                     margin: 24px 32px;
                     box-sizing: border-box;
                     align-items: center;
-                    backdrop-filter: blur(10px);
-                    background: rgba(20,21,22,.3);
+                    backdrop-filter: var(--blur-value);
+                    background: var(--background-transparent);
 
                     -webkit-animation: fadein 1s;
                     /* Safari, Chrome and Opera > 12.1 */
@@ -119,6 +119,8 @@ class NavigationComponent extends HTMLElement{
                         padding: 60px 0 16px 0;
                         box-sizing: border-box;
                         opacity: 0;
+                        backdrop-filter: var(--blur-value);
+                        background: var(--background-transparent)
                     }
 
                     .links-wrapper.menu-active{
