@@ -1,3 +1,9 @@
+:root {
+    --background: #141516;
+    --background-transparent: #14151600;
+  }
+
+
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Set default font family to sans-serif.
@@ -487,7 +493,7 @@ textarea {
 /* General */
 
 body {
-    background: #000;
+    background: var(--background);
     color: white;
     box-sizing: border-box;
     font-size: 1em;
@@ -509,7 +515,7 @@ h1 {
 /* Layout */
 
 .container {
-    padding: 52px 64px;
+    padding: 56px 64px;
     height: 100vh;
     box-sizing: border-box;
 }
@@ -520,7 +526,6 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 0 48px;
 }
 
 #shots a{
@@ -540,7 +545,6 @@ h1 {
     margin-bottom: 25vh;
     width: 40vw;
     flex-direction: column;
-    padding: 0 48px;
     justify-content: center;
     
     -webkit-animation: fadein 1s;

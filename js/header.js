@@ -23,7 +23,9 @@ class NavigationComponent extends HTMLElement{
                     margin: 24px 32px;
                     box-sizing: border-box;
                     align-items: center;
-                    background: rgba(0,0,0,.9);
+                    backdrop-filter: blur(10px);
+                    background: rgba(20,21,22,.3);
+
                     -webkit-animation: fadein 1s;
                     /* Safari, Chrome and Opera > 12.1 */
                     
