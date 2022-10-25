@@ -3,8 +3,6 @@ class NavigationComponent extends HTMLElement{
         super();
         this.innerHTML = `
             <style>
-                @import './css/style.css';
-
                 nav{
                     display: block;
                     width: 100%;
@@ -24,6 +22,7 @@ class NavigationComponent extends HTMLElement{
                     align-items: center;
                     backdrop-filter: var(--blur-value);
                     background: var(--background-transparent);
+                    border-radius: 24px;
 
                     -webkit-animation: fadein 1s;
                     /* Safari, Chrome and Opera > 12.1 */
@@ -88,6 +87,7 @@ class NavigationComponent extends HTMLElement{
                     font-weight: 800;
                     z-index: 2;
                     position: relative;
+                    margin-right: 16px;
                 }
                 
                 @media only screen and (max-width: 60em) {

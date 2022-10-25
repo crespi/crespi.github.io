@@ -3,8 +3,6 @@ class FooterComponent extends HTMLElement{
         super();
         this.innerHTML = `
             <style>
-                @import './css/style.css';
-
                 .footer-container{
                     width: 100%;
                     padding: 48px 0;

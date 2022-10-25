@@ -68,15 +68,22 @@
 
 <body>
     <div class="container">
-        <div class="hero">
-            <introduction-text name="I am Francisco Crespi, a freelance product designer based in Barcelona. Also, I am a UI tutor and mentor at <a href='https://careerfoundry.com' class='animated-link'>CareerFoundry</a>, where I help new designers take their first steps into the digital product design industry."></introduction-text>
-        </div>
+        <introduction-text intro-text="I am Francisco Crespi, a freelance product designer based in Barcelona. Also, I am a UI tutor and mentor at <a href='https://careerfoundry.com' class='animated-link'>CareerFoundry</a>, where I help new designers take their first steps into the digital product design industry."></introduction-text>
+        <!-- <case-study-thumbnail-component
+            case-study-name="Nethermind.io"
+            case-study-description="I designed the website, managed the project (design and content creation), and hired a web development agency to implement it."
+            case-study-year="2022"
+            case-study-link="#"
+            case-study-CTA="Open case study"
+        ></case-study-thumbnail-component> -->
         <div id="shots"></div>
         <div class="about" id="about">
+            <div>
             <h1>About</h1>
-            <p>I've been working at the intersection of cryptocurrencies and product design since 2017. Recently, I've worked with companies like <a class="animated-link" target="_blank" href="https://www.behance.net/gallery/124395929/DAppNode-Dashboard-Airdrop-and-Liquidity-Mining">DAppNode</a> and <a class="animated-link" target="_blank" href="https://dribbble.com/shots/18180867-Nethermind-io">Nethermind</a>.</p>
-            <p>Previously I was Head of Design at <a class="animated-link" target="_blank" href="https://muun.com">Muun,</a> where I helped build and launch a self-custodial Bitcoin wallet for <a class="animated-link" target="_blank" href="https://play.google.com/store/apps/details?id=io.muun.apollo">Android</a> and <a class="animated-link" target="_blank" href="https://apps.apple.com/app/id1482037683">iOS</a>. I hold an MSc. in Cognitive Systems and Interactive Media at <a class="animated-link" target="_blank" href="https://upf.edu/csim">Universitat Pompeu Fabra.<br /><br /></a></p>
-            <p>In my free time I create <a class="animated-link" target="_blank" href="https://instagram.com/crespivis">abstract 3D animations</a> and play them live as a VJ in parties or live shows.</p>
+                <p>I've been working at the intersection of cryptocurrencies and product design since 2017. Recently, I've worked with companies like <a class="animated-link" target="_blank" href="https://www.behance.net/gallery/124395929/DAppNode-Dashboard-Airdrop-and-Liquidity-Mining">DAppNode</a> and <a class="animated-link" target="_blank" href="https://dribbble.com/shots/18180867-Nethermind-io">Nethermind</a>.</p>
+                <p>Previously I was Head of Design at <a class="animated-link" target="_blank" href="https://muun.com">Muun,</a> where I helped build and launch a self-custodial Bitcoin wallet for <a class="animated-link" target="_blank" href="https://play.google.com/store/apps/details?id=io.muun.apollo">Android</a> and <a class="animated-link" target="_blank" href="https://apps.apple.com/app/id1482037683">iOS</a>. I hold an MSc. in Cognitive Systems and Interactive Media at <a class="animated-link" target="_blank" href="https://upf.edu/csim">Universitat Pompeu Fabra.<br /><br /></a></p>
+                <p>In my free time I create <a class="animated-link" target="_blank" href="https://instagram.com/crespivis">abstract 3D animations</a> and play them live as a VJ in parties or live shows.</p>
+            </div>
         </div>
         <header-component></header-component>  
         <footer-component></footer-component>
@@ -88,6 +95,8 @@
     <script src="js/plugins.js"></script>
     <script src="js/header.js"></script>
     <script src="js/footer.js"></script>
+    <script src="js/case-study-thumbnail.js"></script>
+
 
 
     <script>
