@@ -58,6 +58,11 @@ class NavigationComponent extends HTMLElement{
                     width: fit-content;
                 }
 
+                .links-wrapper ul li:last-child {
+                    margin: 0 0 0 16px;
+                    width: fit-content;
+                }
+
                 .menu-button{
                     display: none;
                     z-index: 2;
