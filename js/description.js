@@ -24,6 +24,14 @@ class DescriptionText extends HTMLElement{
                 
                 animation: fadein 1s;
             }
+
+            @media only screen and (max-width: 60em) {
+                .hero, .about{
+                    display: flex;
+                }
+            }
+
+
         </style>
 
         <div class="hero">

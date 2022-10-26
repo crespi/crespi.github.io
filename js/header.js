@@ -140,6 +140,10 @@ class NavigationComponent extends HTMLElement{
                         margin: 16px 16px;
                     }
 
+                    .links-wrapper ul li:last-child {
+                        margin: 16px; 16px;
+                    }
+
 
                 }
             </style>

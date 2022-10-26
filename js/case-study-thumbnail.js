@@ -4,7 +4,7 @@ class CaseStudyThumbnailComponent extends HTMLElement{
         this.innerHTML = `
             <style>
                 .case-study-thumbnail{
-                    display: none;
+                    display: grid;
                     grid-template-columns: 1fr 1fr 1fr;
                     grid-column-gap: 64px;
                     grid-template-rows:    minmax(640px, auto);
