@@ -104,6 +104,8 @@ class NavigationComponent extends HTMLElement{
                     .nav-wrapper{
                         margin: 0;
                         padding: 16px;
+                        background: var(--background-transparent-mobile);
+
                     }
 
                     .menu-button{
@@ -118,13 +120,12 @@ class NavigationComponent extends HTMLElement{
                         left: 0;
                         height: 100vh;
                         width: 100vw;
-                        background: rgba(0,0,0,.9);
                         flex-direction: column;
                         padding: 60px 0 16px 0;
                         box-sizing: border-box;
                         opacity: 0;
                         backdrop-filter: var(--blur-value);
-                        background: var(--background-transparent)
+                        background: var(--background-transparent-mobile);
                     }
 
                     .links-wrapper.menu-active{

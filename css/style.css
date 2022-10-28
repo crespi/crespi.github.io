@@ -1,6 +1,7 @@
 :root {
     --background: #141516;
     --background-transparent: rgba(20,21,22,.3);
+    --background-transparent-mobile: rgba(20,21,22,.8);
     --blur-value: blur(8px);
   }
 
