@@ -2,6 +2,7 @@ class FooterComponent extends HTMLElement{
     constructor() {
         super();
         this.innerHTML = `
+
             <style>
                 .footer-container{
                     width: 100%;
@@ -17,6 +18,7 @@ class FooterComponent extends HTMLElement{
                         justify-content: center;
                         align-items: flex-start;
                         text-align: left;
+                        padding-bottom: 16px;
                     }
 
                     .footer-container p {
@@ -32,5 +34,6 @@ class FooterComponent extends HTMLElement{
             `;
     }
 }
+
 
 window.customElements.define('footer-component', FooterComponent);

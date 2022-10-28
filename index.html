@@ -37,49 +37,35 @@
 
         // Set the Access Token
         var accessToken = 'b6345a2060e96a5762c657e47777eb8b93f49c1bd3490b453ffb05c3b05d89a0';
-
-        // Call Dribble v2 API
-        $.ajax({
-            url: 'https://api.dribbble.com/v2/user/shots?access_token='+accessToken,
-            dataType: 'json',
-            type: 'GET',
-            success: function(data) {  
-            if (data.length > 0) { 
-                $.each(data.reverse(), function(i, val) {                
-                    if(val.video){
-                        console.log(val.video.large_preview_url)
-                        $('#shots').prepend(
-                            '<a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"> <video autoplay="autoplay" muted loop width="100%"> <source src='+val.video.xlarge_preview_url+' type="video/mp4"></video></a>'
-                        )
-                    } else {
-                    $('#shots').prepend(
-                        '<a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img src="'+ val.images.hidpi +'"/></a>'
-                        )
-                    }
-                })
-            }
-            else {
-                $('#shots').append('<p>No shots yet!</p>');
-            }
-            }
-        });
     </script>
 </head>
 
 <body>
     <div class="container">
         <introduction-text intro-text="I am Francisco Crespi, a freelance product designer based in Barcelona. Also, I am a UI tutor and mentor at <a href='https://careerfoundry.com' class='animated-link'>CareerFoundry</a>, where I help new designers take their first steps into the digital product design industry."></introduction-text>
-        <!-- <case-study-thumbnail-component
+        <case-study-thumbnail-component
             case-study-name="Nethermind.io"
             case-study-description="I designed the website, managed the project (design and content creation), and hired a web development agency to implement it."
             case-study-year="2022"
-            case-study-link="#"
+            case-study-link="https://www.behance.net/gallery/148962559/Nethermindio-Website-Redesign"
             case-study-CTA="Open case study"
-        ></case-study-thumbnail-component> -->
-        <div id="shots"></div>
+            case-study-image-thumbnail="./img/nethermind-thumbnail.jpg"
+        >
+        </case-study-thumbnail-component>
+        <case-study-thumbnail-component
+        case-study-name="DAppNode Dashboard"
+        case-study-description="I designed the DeFi dashboard for DAppNode. They were doing a token launch and needed to create a dashboard for their users to stake and manage their own coins."
+        case-study-year="2021"
+        case-study-link="https://www.behance.net/gallery/124395929/DAppNode-Dashboard-Airdrop-and-Liquidity-Mining"
+        case-study-CTA="Open case study"
+        case-study-image-thumbnail="./img/dappnode-thumbnail.png"
+        >
+        </case-study-thumbnail-component>
+
+        <shots-grid></shots-grid>
         <div class="about" id="about">
             <div>
-            <h1>About</h1>
+            <h2>About</h2>
                 <p>I've been working at the intersection of cryptocurrencies and product design since 2017. Recently, I've worked with companies like <a class="animated-link" target="_blank" href="https://www.behance.net/gallery/124395929/DAppNode-Dashboard-Airdrop-and-Liquidity-Mining">DAppNode</a> and <a class="animated-link" target="_blank" href="https://dribbble.com/shots/18180867-Nethermind-io">Nethermind</a>.</p>
                 <p>Previously I was Head of Design at <a class="animated-link" target="_blank" href="https://muun.com">Muun,</a> where I helped build and launch a self-custodial Bitcoin wallet for <a class="animated-link" target="_blank" href="https://play.google.com/store/apps/details?id=io.muun.apollo">Android</a> and <a class="animated-link" target="_blank" href="https://apps.apple.com/app/id1482037683">iOS</a>. I hold an MSc. in Cognitive Systems and Interactive Media at <a class="animated-link" target="_blank" href="https://upf.edu/csim">Universitat Pompeu Fabra.<br /><br /></a></p>
                 <p>In my free time I create <a class="animated-link" target="_blank" href="https://instagram.com/crespivis">abstract 3D animations</a> and play them live as a VJ in parties or live shows.</p>
@@ -88,16 +74,12 @@
         <header-component></header-component>  
         <footer-component></footer-component>
     </div>
-
-
-
     <script src="js/description.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/header.js"></script>
     <script src="js/footer.js"></script>
     <script src="js/case-study-thumbnail.js"></script>
-
-
+    <script src="js/shots.js"></script>
 
     <script>
         (function (i, s, o, g, r, a, m) {
@@ -110,11 +92,10 @@
         ga('create', 'UA-66403735-3', 'auto');
         ga('send', 'pageview');
 
-
-        // Place year in footer
         document.getElementById("year").innerHTML = new Date().getFullYear();
 
     </script>
+
 </body>
 
 </html>

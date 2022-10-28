@@ -28,8 +28,16 @@ class DescriptionText extends HTMLElement{
             @media only screen and (max-width: 60em) {
                 .hero, .about{
                     display: flex;
+                    width: 60%;
                 }
             }
+
+            @media only screen and (max-width: 30em) {
+                .hero, .about{
+                    width: 100%;
+                }
+            }
+
 
 
         </style>

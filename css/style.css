@@ -134,8 +134,9 @@ dfn {
  */
 
 h1 {
-    font-size: 2em;
-    margin: 0.67em 0;
+    font-size: 2.25em;
+    margin: 0 0 16px 0;
+    font-variation-settings: "wght" 200;
 }
 /**
  * Address styling not present in IE 8/9.
@@ -504,14 +505,8 @@ a {
     color: #fff;
     line-height: 1.75;
 }
-p,
-h1 {
+p {
     margin: 0;
-}
-h1 {
-    font-size: 1.1em;
-    font-weight: bold;
-    margin: 12px 0;
 }
 /* Layout */
 
@@ -519,25 +514,6 @@ h1 {
     padding: 56px 64px;
     height: 100vh;
     box-sizing: border-box;
-}
-
-
-#shots{
-    max-width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-#shots a{
-    margin: 24px 0;
-    width: 48%;
-    border-radius: 8px;
-
-}
-
-#shots a img{
-    width: 100%;
 }
 
 @media only screen and (max-width: 60em) {
@@ -561,20 +537,12 @@ h1 {
         top: 0;
         right: 16px;
     }
-
-    #shots{
-        padding: 0;
-    }
-
-    #shots a{
-        width: 100%;
-        border-radius: 8px;
-    }
 }
 
 p{
     line-height: 1.75;
     font-size: 1rem;
+    letter-spacing: 0.01em;
     color: lightgray;
 }
 
@@ -584,6 +552,28 @@ p{
 
 body *{
     transition: 0.2s;
+}
+
+.square-button{
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+    border: solid 1px white;
+    padding: 8px 16px;
+    width: fit-content;
+}
+
+.square-button:hover{
+    background: white;
+    color: var(--background);
+}
+
+.square-button svg{
+    margin-left: 4px;
+}
+
+.square-button:hover svg path{
+    stroke: var(--background);
 }
 
 .animated-link{
@@ -828,6 +818,8 @@ body *{
         page-break-after: avoid;
     }
 }
+
+
 @font-face {
     font-family: 'archivo';
     src: url(../fonts/Archivo-VariableFont_wdth\,wght.woff2) format("woff2-variations"),
