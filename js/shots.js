@@ -59,6 +59,7 @@ class shotsGrid extends HTMLElement{
     }
 }
 
+var accessToken = 'b6345a2060e96a5762c657e47777eb8b93f49c1bd3490b453ffb05c3b05d89a0';
 
 // Dribbble API
 $.ajax({
