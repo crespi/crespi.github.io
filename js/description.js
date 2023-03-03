@@ -7,8 +7,8 @@ class DescriptionText extends HTMLElement{
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
                 grid-column-gap: 64px;
-                margin-top: 30vh;
-                margin-bottom: 30vh;
+                margin-top: 32vh;
+                margin-bottom: 32vh;
                 
                 -webkit-animation: fadein 1s;
                 /* Safari, Chrome and Opera > 12.1 */
