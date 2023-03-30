@@ -20,10 +20,14 @@ class CaseStudyThumbnailComponent extends HTMLElement{
                     grid-column: 2 / 4;
                 }
 
-                .case-study-image img{
+                .case-study-image a{
                     width: 100%;
+                    height: 70vh;
                     border-radius: 8px;
                     cursor: pointer;
+                    display: block;
+                    background-size: cover !important;
+                    background-position: center center !important;
                 }
 
                 .case-study-image img:hover{
@@ -46,6 +50,18 @@ class CaseStudyThumbnailComponent extends HTMLElement{
                         align-items: flex-start;
                         flex-direction: column;
                     }
+
+                    .case-study-thumbnail, .case-study-image{
+                        width: 100%;
+                    }
+
+                    .case-study-thumbnail{
+                        padding: 80px 0;
+                    }
+
+                    .case-study-image a{
+                        height: 30vh;
+                    }    
 
                     .square-button{
                         margin-top: 24px;
@@ -80,8 +96,7 @@ class CaseStudyThumbnailComponent extends HTMLElement{
                     </a>
                 </div>
                 <div class="case-study-image">
-                    <a href="${this.getAttribute('case-study-link')}" target="_blank">
-                        <img src="${this.getAttribute('case-study-image-thumbnail')}" alt="project image">
+                    <a style="background:url('${this.getAttribute('case-study-image-thumbnail')}') "href="${this.getAttribute('case-study-link')}" target="_blank">
                     </a>
                 </div>
             </div>
