@@ -4,11 +4,11 @@ class DescriptionText extends HTMLElement{
         this.innerHTML = `
         <style>
             .hero, .about{
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
-                grid-column-gap: 64px;
-                margin-top: 32vh;
-                margin-bottom: 32vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                width: 40%;
+                min-height: 90vh;
                 
                 -webkit-animation: fadein 1s;
                 /* Safari, Chrome and Opera > 12.1 */
@@ -23,6 +23,14 @@ class DescriptionText extends HTMLElement{
                 /* Opera < 12.1 */
                 
                 animation: fadein 1s;
+            }
+
+            .hero > *, .about > *{
+                margin: 16px 0;
+            }
+
+            .darktitle{
+                color: lightgray;
             }
 
             @media only screen and (max-width: 60em) {
@@ -43,8 +51,19 @@ class DescriptionText extends HTMLElement{
         </style>
 
         <div class="hero">
-            <p>${this.getAttribute('intro-text')}</p>
+            <h1>${this.getAttribute('h1-content')}</h1>
+            <p>${this.getAttribute('intro-content')}</p>
+            
+            <a class="arrow-icon square-button" href="#work">
+                See my work
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5V19" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19 12L12 19L5 12" stroke="white" stroke-linecap="square" stroke-linejoin="round"/>
+                </svg>
+            </a>
         </div>
+        
+
         `;
     }
 }

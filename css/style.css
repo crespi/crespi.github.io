@@ -132,12 +132,16 @@ dfn {
     font-style: italic;
 }
 /**
- * Address variable `h1` font-size and margin within `section` and `article`
+ * Address variable `h2` font-size and margin within `section` and `article`
  * contexts in Firefox 4+, Safari, and Chrome.
  */
 
-h1 {
-    font-size: 2.25em;
+h1{
+    line-height: 1.2em;
+ }
+
+h2 {
+    font-size: 2em;
     margin: 0 0 16px 0;
     font-variation-settings: "wght" 200;
 }
@@ -514,7 +518,7 @@ p {
 /* Layout */
 
 .container {
-    padding: 56px 64px;
+    padding: 64px;
     height: 100vh;
     box-sizing: border-box;
 }
@@ -549,7 +553,6 @@ p {
     .hero, .about{
         width: 90vw;
         padding: 0;
-        margin-top: 20vh;
     }
 
     .contact-links-wrapper {
@@ -586,6 +589,7 @@ body *{
 .square-button:hover{
     background: white;
     color: var(--background);
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 20px 0px;
 }
 
 .square-button svg{
@@ -828,12 +832,12 @@ body *{
         max-width: 100% !important;
     }
     p,
-    h2,
+    h3,
     h3 {
         orphans: 3;
         widows: 3;
     }
-    h2,
+    h3,
     h3 {
         page-break-after: avoid;
     }
