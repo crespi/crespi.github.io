@@ -173,7 +173,7 @@ class NavigationComponent extends HTMLElement{
                                 <a onclick="toggleMenu()" target="_blank" href="https://www.linkedin.com/in/franciscocrespi/">LinkedIn</a>
                             </li>
                             <li class="animated-link">
-                                <p>crespi.f@gmail.com</p>
+                                <p>hi@crespi.design</p>
                             </li>
                         </ul>
                     </div>
