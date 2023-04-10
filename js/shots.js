@@ -76,7 +76,7 @@ $.ajax({
                         )
                     } else {
                     $('#shots').prepend(
-                        '<a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img src="'+ val.images.hidpi +'"/></a>'
+                        '<a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img alt="A product design project titled '+ val.title +'" src="'+ val.images.hidpi +'"/></a>'
                         )
                     }
 
