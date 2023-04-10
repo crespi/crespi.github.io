@@ -5,6 +5,17 @@
     --blur-value: blur(8px);
   }
 
+  *::selection{
+    background: #fff !important;
+    color: #000;
+  }
+
+  *::-moz-selection{
+    background: white !important;
+    color: black;
+  }
+
+
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**

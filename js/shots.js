@@ -49,8 +49,8 @@ class shotsGrid extends HTMLElement{
                     <a href="https://dribbble.com/fcrespi" target="_blank" class="square-button">See more of these
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 8.66667V12.6667C12 13.0203 11.8595 13.3594 11.6095 13.6095C11.3594 13.8595 11.0203 14 10.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V5.33333C2 4.97971 2.14048 4.64057 2.39052 4.39052C2.64057 4.14048 2.97971 4 3.33333 4H7.33333" stroke="white" stroke-linecap="square" stroke-linejoin="round"/>
-                            <path d="M10 2h24V6" stroke="white" stroke-linecap="square" stroke-linejoin="round"/>
-                            <path d="M6.31295 8.97978L5.9594 9.33333L6.6665 10.0404L7.02006 9.68689L6.31295 8.97978ZM14.3534 2.35355C14.5487 2.15829 14.5487 1.84171 14.3534 1.64645C14.1581 1.45118 13.8415 1.45118 13.6463 1.64645L14.3534 2.35355ZM7.02006 9.68689L14.3534 2.35355L13.6463 1.64645L6.31295 8.97978L7.02006 9.68689Z" stroke-width="0.5px" fill="white"/>
+                            <path d="M10 2H14V6" stroke="white" stroke-linecap="square" stroke-linejoin="round"/>
+                            <path d="M6.31307 8.97978L5.95952 9.33333L6.66663 10.0404L7.02018 9.68689L6.31307 8.97978ZM14.3535 2.35355C14.5488 2.15829 14.5488 1.84171 14.3535 1.64645C14.1583 1.45118 13.8417 1.45118 13.6464 1.64645L14.3535 2.35355ZM7.02018 9.68689L14.3535 2.35355L13.6464 1.64645L6.31307 8.97978L7.02018 9.68689Z" fill="white"/>
                         </svg>
                     </a>
                 </div>
