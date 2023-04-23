@@ -34,7 +34,10 @@
         <div id="work">
             <case-study-thumbnail-component
                 case-study-name="Nethermind.io"
-                case-study-description="Web design — Project Management — Content Creation <br><br> I designed the website, managed the project (design and content creation), and hired a web development agency to implement it."
+                project-tags="
+                    <span class='project-tag'>Web design</span>
+                    <span class='project-tag'>Project Management</span>"
+                case-study-description="I designed the website, managed the project (design and content creation), and hired a web development agency to implement it."
                 case-study-year="2022"
                 case-study-link="https://www.behance.net/gallery/148962559/Nethermindio-Website-Redesign"
                 case-study-CTA="Open case study"
@@ -43,7 +46,10 @@
             </case-study-thumbnail-component>
             <case-study-thumbnail-component
             case-study-name="DAppNode Dashboard"
-            case-study-description="UX design — UI Design <br><br> I designed the DeFi dashboard for DAppNode. They were doing a token launch and needed to create a dashboard for their users to stake and manage their own coins."
+            project-tags="
+                <span class='project-tag'>UX design</span>
+                <span class='project-tag'>UI design</span>""
+            case-study-description="I designed the DeFi dashboard for DAppNode. They were doing a token launch and needed to create a dashboard for their users to stake and manage their own coins."
             case-study-year="2021"
             case-study-link="https://www.behance.net/gallery/124395929/DAppNode-Dashboard-Airdrop-and-Liquidity-Mining"
             case-study-CTA="Open case study"
@@ -70,6 +76,8 @@
     <script src="js/footer.js"></script>
     <script src="js/case-study-thumbnail.js"></script>
     <script src="js/shots.js"></script>
+    <script src="js/tag.js"></script>
+
 
     <script>
         document.getElementById("year").innerHTML = new Date().getFullYear();

@@ -28,10 +28,7 @@ class CaseStudyThumbnailComponent extends HTMLElement{
                     display: block;
                     background-size: cover !important;
                     background-position: center center !important;
-                }
-
-                .case-study-image img:hover{
-                    transform: scale(1.01);
+                    background-repeat: no-repeat;
                 }
 
                 .case-study-description{
@@ -41,6 +38,31 @@ class CaseStudyThumbnailComponent extends HTMLElement{
                 .case-study-year{
                     font-variation-settings: "wght" 500;
                     color: white;
+                }
+
+                .project-tags{
+                    margin: 24px 0;
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+
+                .project-tags > .project-tag{
+                    margin-left: 0;
+                }
+
+                .project-tag{
+                    margin: 8px;
+                    text-transform: uppercase;
+                    color: #fafafa;
+                    padding: 12px 16px;
+                    border-radius: 100px;
+                    font-size: 0.6rem;
+                    border: 1px solid #414141;
+                    letter-spacing: .7px;
+                }
+
+                .project-tag:hover{
+                    background: #414141;    
                 }
 
 
@@ -83,6 +105,7 @@ class CaseStudyThumbnailComponent extends HTMLElement{
                 <div class="case-study-context">
                     <div>
                         <h2>${this.getAttribute('case-study-name')}</h2>
+                        <div class="project-tags">${this.getAttribute('project-tags')}</div>
                         <p class="case-study-description">${this.getAttribute('case-study-description')}</p>
                         <p class="case-study-year">${this.getAttribute('case-study-year')}</p>
                     </div>

@@ -156,7 +156,7 @@ class NavigationComponent extends HTMLElement{
                     <div id="linksheet" class="links-wrapper">
                         <ul class="links-left">
                             <li class="animated-link">
-                                <a onclick="toggleMenu()" href="#shots">Work</a>
+                                <a onclick="toggleMenu()" href="#work">Work</a>
                             </li>
                             <li class="animated-link">
                                 <a onclick="toggleMenu()" href="#about">About</a>

@@ -56,9 +56,9 @@ class DescriptionText extends HTMLElement{
             
             <a class="arrow-icon square-button" href="#work">
                 See my work
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 5V19" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M19 12L12 19L5 12" stroke="white" stroke-linecap="square" stroke-linejoin="round"/>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 3.33334V12.6667" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12.6663 8L7.99967 12.6667L3.33301 8" stroke="white" stroke-linecap="square" stroke-linejoin="round"/>
                 </svg>
             </a>
         </div>
