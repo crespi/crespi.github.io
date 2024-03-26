@@ -72,11 +72,11 @@ $.ajax({
                     if(i>4) return false;             
                     if(val.video){
                         $('#shots').prepend(
-                            '<a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"> <video autoplay="autoplay" muted loop width="100%"> <source src='+val.video.xlarge_preview_url+' type="video/mp4"></video></a>'
+                            '<a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"> <video autoplay="autoplay" muted loop height="300" width="100%"> <source src='+val.video.xlarge_preview_url+' type="video/mp4"></video></a>'
                         )
                     } else {
                     $('#shots').prepend(
-                        '<a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img alt="A product design project titled '+ val.title +'" src="'+ val.images.hidpi +'"/></a>'
+                        '<a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img height="350" alt="A product design project titled '+ val.title +'" src="'+ val.images.hidpi +'"/></a>'
                         )
                     }
 
