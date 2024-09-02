@@ -29,7 +29,7 @@ class FooterComponent extends HTMLElement{
             </style>
             <div class="footer-container">
                 <p id="year"></p>
-                <p>This website is <a href="https://github.com/crespi/crespi.github.io" class="animated-link">open source</a> and set on <a href="https://fonts.google.com/specimen/Archivo?query=archivo" class="animated-link">Archivo</a>.</p>
+                <p>This website is set on <a href="https://fonts.google.com/specimen/Archivo?query=archivo" class="animated-link">Archivo</a>.</p>
             </div>
             `;
     }
