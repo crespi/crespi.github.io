@@ -17,12 +17,13 @@ class NavigationComponent extends HTMLElement{
                     justify-content: space-between;
                     flex: 1;
                     padding: 24px 32px;
-                    margin: 24px 32px;
+                    margin: 24px auto;
                     box-sizing: border-box;
                     align-items: center;
                     backdrop-filter: var(--blur-value);
                     background: var(--background-transparent);
                     border-radius: 24px;
+                    max-width: 1600px;
 
                     -webkit-animation: fadein 1s;
                     /* Safari, Chrome and Opera > 12.1 */

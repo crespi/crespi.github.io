@@ -530,9 +530,12 @@ p {
 /* Layout */
 
 .container {
-    padding: 64px;
+    padding: 32px;
     height: 100vh;
     box-sizing: border-box;
+    max-width: 1600px;
+    display: block;
+    margin: auto;
 }
 
 .arrow-icon svg{
