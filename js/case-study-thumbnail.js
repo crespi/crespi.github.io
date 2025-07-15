@@ -13,11 +13,13 @@ class CaseStudyThumbnailComponent extends HTMLElement{
                 .case-study-context{
                     display: flex;
                     flex-direction: column;
-                    justify-content: space-between;
+                    justify-content: flex-start;
+                    grid-column: 3 / 4;
                 }
 
                 .case-study-image{
-                    grid-column: 2 / 4;
+                    grid-column: 1 / 3;
+                    grid-row: 1;
                 }
 
                 .case-study-image a{
@@ -115,9 +117,7 @@ class CaseStudyThumbnailComponent extends HTMLElement{
                 <div class="case-study-context">
                     <div>
                         <h2>${this.getAttribute('case-study-name')}</h2>
-                        <div class="project-tags">${this.getAttribute('project-tags')}</div>
                         <p class="case-study-description">${this.getAttribute('case-study-description')}</p>
-                        <p class="case-study-year">${this.getAttribute('case-study-year')}</p>
                     </div>
                     <div class="cta-container">
                         <a href="${this.getAttribute('case-study-link')}" target="_blank" class="square-button">

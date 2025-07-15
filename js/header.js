@@ -165,15 +165,6 @@ class NavigationComponent extends HTMLElement{
                         </ul>
                         <ul class="links-right">
                             <li class="animated-link">
-                                <a onclick="toggleMenu()" target="_blank" href="https://read.cv/crespi">Read.cv</a>
-                            </li>
-                            <li class="animated-link">
-                                <a onclick="toggleMenu()" target="_blank" href="https://dribbble.com/fcrespi">Dribbble</a>
-                            </li>
-                            <li class="animated-link">
-                                <a onclick="toggleMenu()" target="_blank" href="https://behance.net/fcrespi">Behance</a>
-                            </li>
-                            <li class="animated-link">
                                 <a onclick="toggleMenu()" target="_blank" href="https://www.linkedin.com/in/franciscocrespi/">LinkedIn</a>
                             </li>
                             <li class="animated-link">
