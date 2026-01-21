@@ -57,9 +57,8 @@ h1 {
     margin-bottom: 4px;
 }
 
-.subtitle {
+.text-muted {
     color: var(--text-muted);
-    font-size: 1rem;
 }
 
 h2 {
@@ -132,6 +131,12 @@ a:hover {
     background-image: url('../img/arrow-up-right.svg');
     background-size: contain;
     background-repeat: no-repeat;
+    transition: transform 0.2s ease;
+    transition-delay: 0.4s;
+}
+
+.with-arrow:hover::after {
+    transform: translate(2px, -2px);
 }
 
 .animated-link {
