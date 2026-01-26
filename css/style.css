@@ -45,7 +45,7 @@ body {
 .container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 96px 24px;
+    padding: 128px 24px 96px 24px;
 }
 
 h1 {
