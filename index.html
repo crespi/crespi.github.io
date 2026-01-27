@@ -68,16 +68,49 @@
 
         <section id="about">
             <h2>About</h2>
-            <p>I’m based in Barcelona. In my free time I am probably swimming in open waters or VJing under the name of <a href="https://instagram.com/crespivis" class="animated-link">Crespivis.</a> I hold an MSc. in Cognitive Systems and Interactive Media at Universitat Pompeu Fabra.</p>
+            <p>I'm based in Barcelona. In my free time I am probably swimming in open waters or VJing under the name of <a href="https://instagram.com/crespivis" class="animated-link">Crespivis.</a> I hold an MSc. in Cognitive Systems and Interactive Media at Universitat Pompeu Fabra.</p>
         </section>
 
         <section id="contact">
-            <h2>Contact</h2>
+            <div class="contact-header">
+                <h2>Contact</h2>
+                <div class="say-hi">
+                    <span id="hi-count" class="text-muted"></span>
+                    <button id="say-hi-btn">Say hi</button>
+                </div>
+            </div>
             <p>
                 <a target="_blank" class="animated-link" href="https://www.linkedin.com/in/franciscocrespi/">LinkedIn</a> · hi@crespi.design
             </p>
         </section>
     </div>
+
+    <script src="js/ripple.js"></script>
+    <script>
+        const WORKER_URL = 'https://tiny-heart-39d9.fancy-darkness-cf56.workers.dev/';
+        const btn = document.getElementById('say-hi-btn');
+        const countEl = document.getElementById('hi-count');
+
+        btn.addEventListener('click', (e) => {
+            btn.disabled = true;
+            btn.textContent = 'Hey!';
+            btn.classList.add('anticipate-charge'); // swap: anticipate-breathe, anticipate-ring
+
+            // Trigger ripple from button center after 1 second delay
+            const rect = btn.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            setTimeout(() => {
+                if (window.triggerRipple) {
+                    window.triggerRipple(x, y);
+                }
+            }, 1000);
+
+            fetch(WORKER_URL, { method: 'POST' })
+                .then(r => r.json())
+                .then(data => countEl.textContent = 'Thanks for stopping by :)');
+        });
+    </script>
 </body>
 
 </html>
