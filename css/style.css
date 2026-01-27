@@ -299,7 +299,7 @@ section {
 
 @media (max-width: 480px) {
     .container {
-        padding: 48px 16px;
+        padding: 96px 16px;
     }
 
     .experience-header {
