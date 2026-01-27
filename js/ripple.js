@@ -19,15 +19,16 @@
         precision mediump float;
         uniform vec2 u_click;
         uniform float u_time;
+        uniform float u_dpr;
         uniform sampler2D u_texture;
 
-        const float CELL_WIDTH = 16.0;
-        const float CELL_HEIGHT = 24.0;
+        const float BASE_CELL_WIDTH = 16.0;
+        const float BASE_CELL_HEIGHT = 24.0;
         const float WAVE_SPEED = 400.0;
-        const float WAVE_WIDTH = 150.0;
+        const float WAVE_WIDTH = 250.0;
         const float DURATION = 8.0;
         const float WORD_LENGTH = 6.0;
-        const float WOBBLE_AMOUNT = 100.0;
+        const float WOBBLE_AMOUNT = 150.0;
 
         // Pseudo-random hash function
         float hash(float n) {
@@ -35,7 +36,7 @@
         }
 
         void main() {
-            vec2 cellSize = vec2(CELL_WIDTH, CELL_HEIGHT);
+            vec2 cellSize = vec2(BASE_CELL_WIDTH, BASE_CELL_HEIGHT) * u_dpr;
             vec2 cell = floor(gl_FragCoord.xy / cellSize);
             vec2 cellCenter = (cell + 0.5) * cellSize;
 
@@ -161,8 +162,8 @@
             gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
         };
         image.src = url;
     }
@@ -203,8 +204,10 @@
 
         gl.useProgram(program);
 
+        const dpr = window.devicePixelRatio || 1;
         gl.uniform2f(gl.getUniformLocation(program, 'u_click'), clickPos.x, clickPos.y);
         gl.uniform1f(gl.getUniformLocation(program, 'u_time'), elapsed);
+        gl.uniform1f(gl.getUniformLocation(program, 'u_dpr'), dpr);
 
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, texture);
