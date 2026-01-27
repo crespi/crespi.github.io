@@ -24,11 +24,11 @@
 
         const float BASE_CELL_WIDTH = 16.0;
         const float BASE_CELL_HEIGHT = 24.0;
-        const float WAVE_SPEED = 400.0;
-        const float WAVE_WIDTH = 250.0;
+        const float WAVE_SPEED = 500.0;
+        const float WAVE_WIDTH = 300.0;
         const float DURATION = 8.0;
         const float WORD_LENGTH = 6.0;
-        const float WOBBLE_AMOUNT = 150.0;
+        const float WOBBLE_AMOUNT = 200.0;
 
         // Pseudo-random hash function
         float hash(float n) {
