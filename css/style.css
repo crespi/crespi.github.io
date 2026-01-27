@@ -208,10 +208,7 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.contact-header h2 {
-    margin-bottom: 0;
+    margin-bottom: 8px;
 }
 
 .say-hi {
