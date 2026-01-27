@@ -38,7 +38,7 @@
     top: 0;
     left: 0;
     pointer-events: none;
-    z-index: 9999;
+    z-index: -1;
 }
 
 * {
@@ -208,7 +208,6 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
 }
 
 .contact-header h2 {
@@ -222,20 +221,17 @@ a:hover {
     height: 28px;
 }
 
-#hi-count {
-    line-height: 1;
-}
-
 #say-hi-btn {
     font-family: 'archivo', sans-serif;
     font-size: 16px;
-    color: var(--blue-gray-1000);
-    background: var(--blue-gray-50);
-    border: 1px solid var(--blue-gray-300);
+    color: var(--blue-gray-0);
+    background: var(--blue-gray-1100);
+    border: 1px solid var(--blue-gray-800);
     padding: 6px 10px;
     cursor: pointer;
     border-radius: 8px;
     transition: opacity 0.2s ease;
+    z-index: 100;
 }
 
 #say-hi-btn:hover {

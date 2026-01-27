@@ -22,7 +22,14 @@
 <body>
     <div class="container">
         <header>
-            <h1>Francisco Crespi</h1>
+            <div class="contact-header">
+                <h1>Francisco Crespi</h1>
+                <div class="say-hi">
+                    <span id="hi-count" class="text-muted"></span>
+                    <button id="say-hi-btn">Say hello</button>
+                </div>
+            </div>
+
             <p class="text-muted">Product designer specialized in design systems</p>
         </header>
 
@@ -91,9 +98,15 @@
         const btn = document.getElementById('say-hi-btn');
         const countEl = document.getElementById('hi-count');
 
+        const messages = (count) => [
+            `Hey!`,
+            `Nice to see you!`,
+            `${count} said hello`,
+            `Thanks for stopping by!`
+        ];
+
         btn.addEventListener('click', (e) => {
             btn.disabled = true;
-            btn.textContent = 'Hey!';
             btn.classList.add('anticipate-charge'); // swap: anticipate-breathe, anticipate-ring
 
             // Trigger ripple from button center after 1 second delay
@@ -108,7 +121,11 @@
 
             fetch(WORKER_URL, { method: 'POST' })
                 .then(r => r.json())
-                .then(data => countEl.textContent = 'Thanks for stopping by :)');
+                .then(data => {
+                    const msgList = messages(data.count);
+                    const randomMessage = msgList[Math.floor(Math.random() * msgList.length)];
+                    btn.textContent = randomMessage;
+                });
         });
     </script>
 </body>
