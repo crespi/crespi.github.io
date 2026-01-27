@@ -23,15 +23,23 @@
 
         const float CELL_WIDTH = 16.0;
         const float CELL_HEIGHT = 24.0;
-        const float WAVE_SPEED = 400.0;
-        const float WAVE_WIDTH = 150.0;
-        const float DURATION = 8.0;
-        const float WORD_LENGTH = 6.0;
+        const float WAVE_SPEED = 200.0;
+        const float WAVE_WIDTH = 200.0;
+        const float DURATION = 6.0;
+        const float WORD_LENGTH = 6.0;      // " hello" = 6 chars (first 6 in bitmap)
+        const float TOTAL_CHARS = 27.0;     // total chars in bitmap (adjust to match your bitmap)
         const float WOBBLE_AMOUNT = 100.0;
+        const float SCRAMBLE_DURATION = 0.1; // seconds to scramble before settling
+        const float SCRAMBLE_SPEED = 3.0;   // how fast chars cycle during scramble
 
         // Pseudo-random hash function
         float hash(float n) {
             return fract(sin(n) * 43758.5453);
+        }
+
+        // Hash for vec2
+        float hash2(vec2 p) {
+            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
         }
 
         void main() {
@@ -64,16 +72,33 @@
             // Wave intensity (1.0 at wave center, 0.0 outside)
             float wave = 1.0 - smoothstep(0.0, WAVE_WIDTH, waveDist);
 
-            // Fade out over time
-            float fade = 1.0 - (u_time / DURATION);
+            // Fade out over time (power curve - stays visible longer)
+            float fade = pow(1.0 - (u_time / DURATION), 1.0);
             wave *= fade;
 
-            // Which letter based on cell X + row offset (breaks up columns)
-            float letterIndex = mod(cell.x + rowOffset, WORD_LENGTH);
+            // Calculate when wave arrived at this cell
+            float waveArrivalRadius = dist - wobble;
+            float arrivalProgress = pow(waveArrivalRadius / maxRadius, 2.0); // inverse of eased
+            float arrivalTime = arrivalProgress * DURATION;
+            float waveAge = u_time - arrivalTime;
+
+            // Target letter (the correct letter for " hello")
+            float targetIndex = mod(cell.x + rowOffset, WORD_LENGTH);
+
+            // Scramble effect
+            float scrambleProgress = clamp(waveAge / SCRAMBLE_DURATION, 0.0, 1.0);
+
+            // Random character during scramble, using cell position for uniqueness
+            float timeStep = floor(waveAge * SCRAMBLE_SPEED);
+            float randomIndex = floor(hash2(cell + timeStep) * TOTAL_CHARS);
+
+            // Blend from random to target based on scramble progress
+            float letterIndex = mix(randomIndex, targetIndex, scrambleProgress);
+            letterIndex = floor(letterIndex + 0.5); // snap to integer
 
             // Sample texture
             vec2 cellUV = fract(gl_FragCoord.xy / cellSize);
-            float letterWidth = 1.0 / WORD_LENGTH;
+            float letterWidth = 1.0 / TOTAL_CHARS;
             vec2 texCoord = vec2(
                 letterIndex * letterWidth + cellUV.x * letterWidth,
                 1.0 - cellUV.y
@@ -129,7 +154,7 @@
         gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
 
         // Load texture
-        loadTexture('img/ripple-hello.png');
+        loadTexture('img/ripple-scramble.png');
 
         resize();
         window.addEventListener('resize', resize);
