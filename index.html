@@ -22,15 +22,15 @@
 <body>
     <div class="container">
         <header>
+            <h1>Francisco Crespi</h1>
             <div class="contact-header">
-                <h1>Francisco Crespi</h1>
+                <p class="text-muted">Product designer specialized in design systems</p>
                 <div class="say-hi">
                     <span id="hi-count" class="text-muted"></span>
                     <button id="say-hi-btn">Say hello</button>
                 </div>
             </div>
 
-            <p class="text-muted">Product designer specialized in design systems</p>
         </header>
 
         <section id="work">
@@ -88,7 +88,8 @@
         </section>
     </div>
 
-    <script src="js/ripple.js"></script>
+    <script src="js/text-scramble.js"></script>
+    <script src="js/effects/ripple.js"></script>
     <script>
         const WORKER_URL = 'https://tiny-heart-39d9.fancy-darkness-cf56.workers.dev/';
         const btn = document.getElementById('say-hi-btn');
@@ -104,15 +105,15 @@
 
         btn.addEventListener('click', (e) => {
             btn.disabled = true;
-            btn.classList.add('anticipate-charge'); // swap: anticipate-breathe, anticipate-ring
+            btn.classList.add('anticipate-charge');
 
-            // Trigger ripple from button center after 1 second delay
+            // Trigger scramble effect from button center after 1 second delay
             const rect = btn.getBoundingClientRect();
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
             setTimeout(() => {
-                if (window.triggerRipple) {
-                    window.triggerRipple(x, y);
+                if (window.TextScramble) {
+                    window.TextScramble.trigger('ripple', x, y);
                 }
             }, 1000);
 

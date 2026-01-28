@@ -1,18 +1,6 @@
-@font-face {
-    font-family: 'archivo';
-    src: url('../fonts/Archivo-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'archivo';
-    src: url('../fonts/Archivo-ExtraBold.woff2') format('woff2');
-    font-weight: 800;
-    font-style: normal;
-}
-
 :root {
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --line-unit: 28px;
     --background: var(--blue-gray-1100);
     --text: var(--blue-gray-0);
     --text-muted: var(--blue-gray-200);
@@ -33,13 +21,6 @@
 
 }
 
-#ripple-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: -1;
-}
 
 * {
     margin: 0;
@@ -53,40 +34,38 @@
 }
 
 html {
-    font-family: 'archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-mono);
     font-size: 16px;
     scroll-behavior: smooth;
-    letter-spacing: .2px;
 }
 
 body {
     background: var(--background);
     color: var(--text);
-    line-height: 1.8;
+    line-height: var(--line-unit);
+    word-spacing: -1.5px;
+    letter-spacing: -0.2px;
 }
 
 .container {
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
-    padding: 128px 24px 96px 24px;
+    padding: calc(var(--line-unit) * 5) 24px calc(var(--line-unit) * 4) 24px;
 }
 
 h1 {
     color: var(--text);
-    font-family: 'archivo', sans-serif;
     font-size: 16px;
-    font-weight: 800;
-    line-height: 24px;
-    padding: 6px 10px 6px 0;
+    font-weight: 900;
+    line-height: var(--line-unit);
 }
 
 h2 {
     color: var(--text);
-    font-family: 'archivo', sans-serif;
     font-size: 16px;
-    font-weight: 800;
-    line-height: 24px;
-    margin-bottom: 40px;
+    font-weight: 900;
+    line-height: var(--line-unit);
+    margin-bottom: calc(var(--line-unit) * 2);
 }
 
 .text-muted {
@@ -131,7 +110,7 @@ a:hover {
 }
 
 section {
-    margin-top: 96px;
+    margin-top: calc(var(--line-unit) * 3);
 }
 
 .section-header {
@@ -145,7 +124,7 @@ section {
 }
 
 .experience {
-    margin-bottom: 40px;
+    margin-bottom: calc(var(--line-unit) * 2);
 }
 
 .experience-header {
@@ -153,6 +132,7 @@ section {
     justify-content: space-between;
     align-items: baseline;
     gap: 16px;
+
 }
 
 
@@ -164,7 +144,6 @@ section {
 
 .experience-description {
     color: var(--text-muted);
-    margin-top: 16px;
 }
 
 .with-arrow::after {
@@ -211,7 +190,8 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: calc(var(--line-unit) * 1);
+
 }
 
 .say-hi {
@@ -222,15 +202,15 @@ section {
 }
 
 #say-hi-btn {
-    font-family: 'archivo', sans-serif;
+    font-family: var(--font-mono);
     font-size: 16px;
     color: var(--blue-gray-0);
-    background: var(--blue-gray-1100);
+    background: var(--blue-gray-1000);
     border: 1px solid var(--blue-gray-800);
     padding: 6px 10px;
     cursor: pointer;
     border-radius: 8px;
-    transition: opacity 0.2s ease;
+    /* transition: opacity 0.2s ease; */
     z-index: 100;
 }
 
@@ -240,7 +220,7 @@ section {
 
 #say-hi-btn:disabled {
     cursor: default;
-    opacity: 0.7;
+    background: var(--blue-gray-1100);
 }
 
 /* Animation 2: Charge pulse - glowing intensifies */
@@ -299,7 +279,7 @@ section {
 
 @media (max-width: 480px) {
     .container {
-        padding: 96px 16px;
+        padding: calc(var(--line-unit) * 3) 16px;
     }
 
     .experience-header {
