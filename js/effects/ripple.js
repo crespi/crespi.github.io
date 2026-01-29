@@ -1,9 +1,10 @@
 // Ripple Effect - expanding wave that scrambles text as it passes
 
 (function() {
-    const WAVE_SPEED = 500;     // pixels per second
+    const MAX_RADIUS = 2500;    // maximum distance the wave travels
     const WAVE_WIDTH = 150;     // width of the scramble band in pixels
-    const FADE_WIDTH = 75;     // width of soft edge fade in pixels
+    const FADE_WIDTH = 75;      // width of soft edge fade in pixels
+    const EASE_POWER = 0.4;     // <1 = ease-out (fast start, slows down)
 
     const rippleEffect = {
         name: 'ripple',
@@ -18,8 +19,10 @@
                 Math.pow(charY - originY, 2)
             );
 
-            // Wave front position (how far the leading edge has traveled)
-            const waveFront = (elapsed / 1000) * WAVE_SPEED;
+            // Ease-out: starts fast, slows down
+            const progress = elapsed / duration;
+            const eased = Math.pow(progress, EASE_POWER);
+            const waveFront = eased * MAX_RADIUS;
 
             // Wave back position (trailing edge)
             const waveBack = waveFront - WAVE_WIDTH;

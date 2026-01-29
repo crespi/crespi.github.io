@@ -1,6 +1,6 @@
 :root {
     --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-    --line-unit: 28px;
+    --line-unit: 26px;
     --background: var(--blue-gray-1100);
     --text: var(--blue-gray-0);
     --text-muted: var(--blue-gray-200);
@@ -35,7 +35,7 @@
 
 html {
     font-family: var(--font-mono);
-    font-size: 16px;
+    font-size: 15px;
     scroll-behavior: smooth;
 }
 
@@ -55,14 +55,14 @@ body {
 
 h1 {
     color: var(--text);
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 900;
     line-height: var(--line-unit);
 }
 
 h2 {
     color: var(--text);
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 900;
     line-height: var(--line-unit);
     margin-bottom: calc(var(--line-unit) * 2);
@@ -203,7 +203,7 @@ section {
 
 #say-hi-btn {
     font-family: var(--font-mono);
-    font-size: 16px;
+    font-size: 15px;
     color: var(--blue-gray-0);
     background: var(--blue-gray-1000);
     border: 1px solid var(--blue-gray-800);

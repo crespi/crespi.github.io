@@ -1,12 +1,14 @@
 // Text Scramble Effect System
 // Uses overlay technique to prevent layout reflow
+// Pre-loads DOM elements for instant animation start
 
 (function() {
     const DEFAULT_CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     const GRID_WORD = 'hello ';
-    const CELL_HEIGHT = 28; // line height in pixels (matches --line-unit)
+    const CELL_HEIGHT = 26; // line height in pixels (matches --line-unit)
 
     let CELL_WIDTH = 10; // will be measured dynamically
+    let initialized = false;
 
     // Measure actual character width from the page's font
     function measureCharWidth() {
@@ -41,7 +43,7 @@
         effects[name] = effect;
     }
 
-    // Create background grid of "hello" characters
+    // Create background grid of "hello" characters (runs once on page load)
     function createGrid() {
         // Find where text actually starts to align grid
         const container = document.querySelector('.container');
@@ -67,6 +69,7 @@
             font-size: 16px;
             line-height: ${CELL_HEIGHT}px;
             color: var(--text-muted, #b0bec5);
+            visibility: hidden;
         `;
 
         const cols = Math.ceil(window.innerWidth / CELL_WIDTH) + GRID_WORD.length;
@@ -109,15 +112,6 @@
         document.body.appendChild(gridContainer);
     }
 
-    // Remove background grid
-    function removeGrid() {
-        if (gridContainer) {
-            gridContainer.remove();
-            gridContainer = null;
-            gridCells = [];
-        }
-    }
-
     // Check if element or any ancestor has data-no-scramble
     function shouldSkip(element) {
         while (element) {
@@ -150,7 +144,7 @@
         return textNodes;
     }
 
-    // Create overlay with character spans positioned over original text
+    // Create overlay with character spans positioned over original text (runs once on page load)
     function createOverlay() {
         const container = document.querySelector('.container');
         if (!container) return;
@@ -166,6 +160,7 @@
             z-index: 1000;
             font-family: var(--font-mono, monospace);
             font-size: 16px;
+            visibility: hidden;
         `;
 
         const textNodes = getTextNodes(container);
@@ -233,29 +228,43 @@
                 });
             });
 
-            // Store for cleanup - keep the measuring wrapper, we'll restore later
-            elements.push({ wrapper: measuringWrapper, textNode, text, charSpans });
+            // Store reference to measuring wrapper and spans
+            elements.push({ wrapper: measuringWrapper, text, charSpans });
         });
 
         document.body.appendChild(overlayContainer);
     }
 
-    // Remove overlay and restore original text
-    function removeOverlay() {
-        // Restore original text nodes
-        elements.forEach(({ wrapper, text }) => {
-            const textNode = document.createTextNode(text);
-            wrapper.parentNode.replaceChild(textNode, wrapper);
+    // Update overlay positions (call before animation if user may have scrolled)
+    function updateOverlayPositions() {
+        overlayChars.forEach(data => {
+            const rect = data.originalSpan.getBoundingClientRect();
+            data.span.style.left = rect.left + 'px';
+            data.span.style.top = rect.top + 'px';
+            data.x = rect.left + rect.width / 2;
+            data.y = rect.top + rect.height / 2;
+        });
+    }
+
+    // Reset state after animation ends (hide but don't remove)
+    function resetState() {
+        // Reset grid cell opacities
+        gridCells.forEach(cell => {
+            cell.span.style.opacity = 0;
         });
 
-        // Remove overlay container
-        if (overlayContainer) {
-            overlayContainer.remove();
-            overlayContainer = null;
-        }
+        // Reset overlay
+        overlayChars.forEach(data => {
+            data.span.style.opacity = 0;
+            data.span.style.background = 'transparent';
+            data.span.textContent = data.original;
+            data.originalSpan.style.opacity = 1;
+            data.lastChange = null;
+        });
 
-        elements = [];
-        overlayChars = [];
+        // Hide containers
+        if (gridContainer) gridContainer.style.visibility = 'hidden';
+        if (overlayContainer) overlayContainer.style.visibility = 'hidden';
     }
 
     // Get random character from charset
@@ -266,6 +275,14 @@
     // Main animation loop
     function animate(timestamp) {
         if (!animating || !currentEffect) return;
+
+        // Reveal containers on first frame
+        if (gridContainer && gridContainer.style.visibility === 'hidden') {
+            gridContainer.style.visibility = 'visible';
+        }
+        if (overlayContainer && overlayContainer.style.visibility === 'hidden') {
+            overlayContainer.style.visibility = 'visible';
+        }
 
         const elapsed = timestamp - startTime;
 
@@ -316,6 +333,11 @@
     function triggerEffect(effectName, x, y) {
         if (animating) return;
 
+        if (!initialized) {
+            console.warn('TextScramble not initialized yet');
+            return;
+        }
+
         const effect = effects[effectName];
         if (!effect) {
             console.warn(`Effect "${effectName}" not registered`);
@@ -325,16 +347,10 @@
         currentEffect = effect;
         origin = { x, y };
 
-        // Measure actual character width
-        measureCharWidth();
+        // Update overlay positions in case user scrolled
+        updateOverlayPositions();
 
-        // Create background grid
-        createGrid();
-
-        // Create overlay
-        createOverlay();
-
-        // Start animation
+        // Start animation immediately - no heavy DOM work needed!
         animating = true;
         startTime = performance.now();
         requestAnimationFrame(animate);
@@ -344,13 +360,31 @@
     function endEffect() {
         animating = false;
         currentEffect = null;
-        removeOverlay();
-        removeGrid();
+        resetState();
+    }
+
+    // Initialize on page load
+    function init() {
+        if (initialized) return;
+
+        measureCharWidth();
+        createGrid();
+        createOverlay();
+        initialized = true;
+    }
+
+    // Auto-initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        // DOM already loaded, init immediately
+        init();
     }
 
     // Expose API
     window.TextScramble = {
         registerEffect,
-        trigger: triggerEffect
+        trigger: triggerEffect,
+        init // expose for manual init if needed
     };
 })();
