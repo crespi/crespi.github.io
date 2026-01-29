@@ -211,6 +211,7 @@ section {
     border-radius: 8px;
     transition: opacity 0.2s ease;
     z-index: 100;
+    font-size: 15px;
 }
 
 #say-hi-btn:hover {
