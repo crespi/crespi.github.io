@@ -4,7 +4,7 @@
 
 (function() {
     const DEFAULT_CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    const GRID_WORD = 'hello ';
+    const GRID_WORD = 'hello hi! ';
     const CELL_HEIGHT = 26; // line height in pixels (matches --line-unit)
 
     let CELL_WIDTH = 10; // will be measured dynamically
@@ -34,6 +34,7 @@
     let currentEffect = null;
     let startTime = 0;
     let origin = { x: 0, y: 0 };
+    let onCompleteCallback = null;
 
     // Registry of available effects
     const effects = {};
@@ -68,8 +69,8 @@
             font-family: var(--font-mono, monospace);
             font-size: 16px;
             line-height: ${CELL_HEIGHT}px;
-            color: var(--text-muted, #b0bec5);
-            visibility: hidden;
+            color: var(--text, #fff);
+            display: none;
         `;
 
         const cols = Math.ceil(window.innerWidth / CELL_WIDTH) + GRID_WORD.length;
@@ -160,7 +161,7 @@
             z-index: 1000;
             font-family: var(--font-mono, monospace);
             font-size: 16px;
-            visibility: hidden;
+            display: none;
         `;
 
         const textNodes = getTextNodes(container);
@@ -263,8 +264,8 @@
         });
 
         // Hide containers
-        if (gridContainer) gridContainer.style.visibility = 'hidden';
-        if (overlayContainer) overlayContainer.style.visibility = 'hidden';
+        if (gridContainer) gridContainer.style.display = 'none';
+        if (overlayContainer) overlayContainer.style.display = 'none';
     }
 
     // Get random character from charset
@@ -277,11 +278,11 @@
         if (!animating || !currentEffect) return;
 
         // Reveal containers on first frame
-        if (gridContainer && gridContainer.style.visibility === 'hidden') {
-            gridContainer.style.visibility = 'visible';
+        if (gridContainer && gridContainer.style.display === 'none') {
+            gridContainer.style.display = 'block';
         }
-        if (overlayContainer && overlayContainer.style.visibility === 'hidden') {
-            overlayContainer.style.visibility = 'visible';
+        if (overlayContainer && overlayContainer.style.display === 'none') {
+            overlayContainer.style.display = 'block';
         }
 
         const elapsed = timestamp - startTime;
@@ -329,8 +330,15 @@
         requestAnimationFrame(animate);
     }
 
+    // Prepare for animation (call during delay period before trigger)
+    function prepare() {
+        if (!initialized) return;
+        // Update overlay positions in case user scrolled
+        updateOverlayPositions();
+    }
+
     // Start an effect
-    function triggerEffect(effectName, x, y) {
+    function triggerEffect(effectName, x, y, onComplete) {
         if (animating) return;
 
         if (!initialized) {
@@ -346,9 +354,7 @@
 
         currentEffect = effect;
         origin = { x, y };
-
-        // Update overlay positions in case user scrolled
-        updateOverlayPositions();
+        onCompleteCallback = onComplete || null;
 
         // Start animation immediately - no heavy DOM work needed!
         animating = true;
@@ -361,6 +367,11 @@
         animating = false;
         currentEffect = null;
         resetState();
+
+        if (onCompleteCallback) {
+            onCompleteCallback();
+            onCompleteCallback = null;
+        }
     }
 
     // Initialize on page load
@@ -385,6 +396,7 @@
     window.TextScramble = {
         registerEffect,
         trigger: triggerEffect,
+        prepare, // call during delay before trigger
         init // expose for manual init if needed
     };
 })();

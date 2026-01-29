@@ -25,10 +25,7 @@
             <h1>Francisco Crespi</h1>
             <div class="contact-header">
                 <p class="text-muted">Product designer specialized in design systems</p>
-                <div class="say-hi">
-                    <span id="hi-count" class="text-muted"></span>
-                    <button id="say-hi-btn">Say hello</button>
-                </div>
+                <button id="say-hi-btn">Say hello</button>
             </div>
 
         </header>
@@ -79,9 +76,7 @@
         </section>
 
         <section id="contact">
-            <div class="contact-header">
-                <h2>Contact</h2>
-            </div>
+            <h2>Contact</h2>
             <p>
                 <a target="_blank" class="animated-link" href="https://www.linkedin.com/in/franciscocrespi/">LinkedIn</a> · hi@crespi.design
             </p>
@@ -107,13 +102,23 @@
             btn.disabled = true;
             btn.classList.add('anticipate-charge');
 
+            // Prepare overlay positions now (during the 1s delay) so trigger is instant
+            if (window.TextScramble) {
+                window.TextScramble.prepare();
+            }
+
             // Trigger scramble effect from button center after 1 second delay
             const rect = btn.getBoundingClientRect();
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
             setTimeout(() => {
                 if (window.TextScramble) {
-                    window.TextScramble.trigger('ripple', x, y);
+                    window.TextScramble.trigger('ripple', x, y, () => {
+                        // Reset button when animation completes
+                        btn.disabled = false;
+                        btn.classList.remove('anticipate-charge');
+                        btn.textContent = 'Say hello';
+                    });
                 }
             }, 1000);
 

@@ -2,9 +2,8 @@
 
 (function() {
     const MAX_RADIUS = 2500;    // maximum distance the wave travels
-    const WAVE_WIDTH = 150;     // width of the scramble band in pixels
+    const WAVE_WIDTH = 250;     // width of the scramble band in pixels
     const FADE_WIDTH = 75;      // width of soft edge fade in pixels
-    const EASE_POWER = 0.4;     // <1 = ease-out (fast start, slows down)
 
     const rippleEffect = {
         name: 'ripple',
@@ -19,10 +18,9 @@
                 Math.pow(charY - originY, 2)
             );
 
-            // Ease-out: starts fast, slows down
+            // Linear progression
             const progress = elapsed / duration;
-            const eased = Math.pow(progress, EASE_POWER);
-            const waveFront = eased * MAX_RADIUS;
+            const waveFront = progress * MAX_RADIUS;
 
             // Wave back position (trailing edge)
             const waveBack = waveFront - WAVE_WIDTH;
