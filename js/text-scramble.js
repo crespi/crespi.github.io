@@ -4,25 +4,44 @@
 
 (function() {
     const DEFAULT_CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    const GRID_WORD = 'hello hi! ';
-    const CELL_HEIGHT = 26; // line height in pixels (matches --line-unit)
+    const GRID_WORD = 'hello ';
+    const WORD_SPACING = -1.5; // matches CSS word-spacing
+    const VERTICAL_OFFSET = 2; // tweak this to adjust vertical alignment (positive = down, negative = up)
 
     let CELL_WIDTH = 10; // will be measured dynamically
+    let CELL_HEIGHT = 26; // will be measured dynamically
     let initialized = false;
 
-    // Measure actual character width from the page's font
-    function measureCharWidth() {
-        const testSpan = document.createElement('span');
-        testSpan.style.cssText = `
+    // Measure actual character dimensions from the page's font
+    function measureCharDimensions() {
+        // Measure width (including letter-spacing)
+        const widthSpan = document.createElement('span');
+        widthSpan.style.cssText = `
             font-family: var(--font-mono, ui-monospace, monospace);
-            font-size: 16px;
+            font-size: 15px;
+            letter-spacing: -0.2px;
             position: absolute;
             visibility: hidden;
         `;
-        testSpan.textContent = 'X';
-        document.body.appendChild(testSpan);
-        CELL_WIDTH = testSpan.getBoundingClientRect().width;
-        testSpan.remove();
+        widthSpan.textContent = 'XXXXXXXXXX';
+        document.body.appendChild(widthSpan);
+        CELL_WIDTH = widthSpan.getBoundingClientRect().width / 10;
+        widthSpan.remove();
+
+        // Measure line height by creating two lines and measuring distance
+        const heightDiv = document.createElement('div');
+        heightDiv.style.cssText = `
+            font-family: var(--font-mono, ui-monospace, monospace);
+            font-size: 15px;
+            line-height: var(--line-unit, 26px);
+            position: absolute;
+            visibility: hidden;
+        `;
+        heightDiv.innerHTML = '<span>X</span><br><span>X</span>';
+        document.body.appendChild(heightDiv);
+        const spans = heightDiv.querySelectorAll('span');
+        CELL_HEIGHT = spans[1].getBoundingClientRect().top - spans[0].getBoundingClientRect().top;
+        heightDiv.remove();
     }
 
     let elements = [];       // Elements we've modified
@@ -51,15 +70,20 @@
         const firstText = container ? container.querySelector('h1, h2, p') : null;
         const textRect = firstText ? firstText.getBoundingClientRect() : { top: 0, left: 0 };
 
+        // Calculate pattern width (accounts for narrower spaces)
+        const spaceCount = (GRID_WORD.match(/ /g) || []).length;
+        const charCount = GRID_WORD.length - spaceCount;
+        const patternWidth = charCount * CELL_WIDTH + spaceCount * (CELL_WIDTH + WORD_SPACING);
+
         // Calculate offsets to align grid with text
         const gridOffsetY = textRect.top % CELL_HEIGHT;
-        const gridOffsetX = textRect.left % CELL_WIDTH;
+        const gridOffsetX = textRect.left % patternWidth;
 
         gridContainer = document.createElement('div');
         gridContainer.id = 'scramble-grid';
         gridContainer.style.cssText = `
             position: fixed;
-            top: ${gridOffsetY}px;
+            top: ${gridOffsetY + VERTICAL_OFFSET}px;
             left: ${gridOffsetX}px;
             width: 100vw;
             height: 100vh;
@@ -67,8 +91,10 @@
             z-index: -1;
             overflow: hidden;
             font-family: var(--font-mono, monospace);
-            font-size: 16px;
+            font-size: 15px;
             line-height: ${CELL_HEIGHT}px;
+            letter-spacing: -0.2px;
+            word-spacing: -1.5px;
             color: var(--text, #fff);
             display: none;
         `;
@@ -83,28 +109,37 @@
             rowDiv.style.cssText = `
                 white-space: nowrap;
                 height: ${CELL_HEIGHT}px;
+                line-height: ${CELL_HEIGHT}px;
             `;
 
             // Offset each row for visual interest
             const offset = (row % GRID_WORD.length);
 
+            let xPos = 0; // track cumulative x position
             for (let col = 0; col < cols; col++) {
                 const charIndex = (col + offset) % GRID_WORD.length;
+                const char = GRID_WORD[charIndex];
+                const isSpace = char === ' ';
+                const charWidth = isSpace ? CELL_WIDTH + WORD_SPACING : CELL_WIDTH;
+
                 const span = document.createElement('span');
-                span.textContent = GRID_WORD[charIndex];
+                span.textContent = char;
                 span.style.cssText = `
                     display: inline-block;
-                    width: ${CELL_WIDTH}px;
+                    width: ${charWidth}px;
                     text-align: center;
+                    vertical-align: top;
                     opacity: 0;
                 `;
 
                 rowDiv.appendChild(span);
 
                 // Store cell data - account for grid offset
-                const x = gridOffsetX + col * CELL_WIDTH + CELL_WIDTH / 2;
+                const x = gridOffsetX + xPos + charWidth / 2;
                 const y = gridOffsetY + row * CELL_HEIGHT + CELL_HEIGHT / 2;
                 gridCells.push({ span, x, y });
+
+                xPos += charWidth;
             }
 
             gridContainer.appendChild(rowDiv);
@@ -160,7 +195,7 @@
             pointer-events: none;
             z-index: 1000;
             font-family: var(--font-mono, monospace);
-            font-size: 16px;
+            font-size: 15px;
             display: none;
         `;
 
@@ -378,7 +413,7 @@
     function init() {
         if (initialized) return;
 
-        measureCharWidth();
+        measureCharDimensions();
         createGrid();
         createOverlay();
         initialized = true;
