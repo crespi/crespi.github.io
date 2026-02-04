@@ -76,8 +76,9 @@
         const patternWidth = charCount * CELL_WIDTH + spaceCount * (CELL_WIDTH + WORD_SPACING);
 
         // Calculate offsets to align grid with text
-        const gridOffsetY = textRect.top % CELL_HEIGHT;
-        const gridOffsetX = textRect.left % patternWidth;
+        // Use negative offset to start before viewport edge, ensuring full coverage
+        const gridOffsetY = (textRect.top % CELL_HEIGHT) - CELL_HEIGHT;
+        const gridOffsetX = (textRect.left % patternWidth) - patternWidth;
 
         gridContainer = document.createElement('div');
         gridContainer.id = 'scramble-grid';
@@ -85,8 +86,8 @@
             position: fixed;
             top: ${gridOffsetY + VERTICAL_OFFSET}px;
             left: ${gridOffsetX}px;
-            width: 100vw;
-            height: 100vh;
+            width: calc(100vw + ${patternWidth * 2}px);
+            height: calc(100vh + ${CELL_HEIGHT * 2}px);
             pointer-events: none;
             z-index: -1;
             overflow: hidden;
@@ -99,8 +100,8 @@
             display: none;
         `;
 
-        const cols = Math.ceil(window.innerWidth / CELL_WIDTH) + GRID_WORD.length;
-        const rows = Math.ceil(window.innerHeight / CELL_HEIGHT) + 2;
+        const cols = Math.ceil(window.innerWidth / CELL_WIDTH) + GRID_WORD.length * 3;
+        const rows = Math.ceil(window.innerHeight / CELL_HEIGHT) + 4;
 
         gridCells = [];
 
@@ -236,19 +237,26 @@
                 const isSpace = !char.trim();
                 const rect = span.getBoundingClientRect();
 
+                // Extend background to cover full line height (hides grid ascenders)
+                const charCenterY = rect.top + rect.height / 2;
+                const extendedTop = charCenterY - CELL_HEIGHT / 2;
+
                 // Create overlay character - match exact styles of original
                 const overlaySpan = document.createElement('span');
                 overlaySpan.textContent = char;
                 overlaySpan.style.cssText = `
                     position: absolute;
                     left: ${rect.left}px;
-                    top: ${rect.top}px;
+                    top: ${extendedTop}px;
                     width: ${rect.width}px;
-                    height: ${rect.height}px;
-                    line-height: ${rect.height}px;
+                    height: ${CELL_HEIGHT}px;
+                    line-height: ${CELL_HEIGHT}px;
                     font-weight: ${fontWeight};
                     color: ${color};
                     opacity: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 `;
 
                 overlayContainer.appendChild(overlaySpan);
@@ -275,10 +283,12 @@
     function updateOverlayPositions() {
         overlayChars.forEach(data => {
             const rect = data.originalSpan.getBoundingClientRect();
+            const charCenterY = rect.top + rect.height / 2;
+            const extendedTop = charCenterY - CELL_HEIGHT / 2;
             data.span.style.left = rect.left + 'px';
-            data.span.style.top = rect.top + 'px';
+            data.span.style.top = extendedTop + 'px';
             data.x = rect.left + rect.width / 2;
-            data.y = rect.top + rect.height / 2;
+            data.y = charCenterY;
         });
     }
 
