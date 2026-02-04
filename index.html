@@ -114,7 +114,7 @@
             const y = rect.top + rect.height / 2;
             setTimeout(() => {
                 if (window.TextScramble) {
-                    window.TextScramble.trigger('ripple', x, y, () => {
+                    window.TextScramble.trigger('hello-wipe', x, y, () => {
                         // Reset button when animation completes
                         btn.disabled = false;
                         btn.classList.remove('anticipate-charge');
