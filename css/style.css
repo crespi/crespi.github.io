@@ -47,11 +47,34 @@ body {
     letter-spacing: -0.2px;
 }
 
+/* Initial load animation */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        filter: blur(6px);
+        transform: scale(1.08);
+    }
+    to {
+        opacity: 1;
+        filter: none;
+        transform: none;
+    }
+}
+
 .container {
     max-width: 650px;
     margin: 0 auto;
     padding: calc(var(--line-unit) * 5) 24px calc(var(--line-unit) * 4) 24px;
 }
+
+.container > * {
+    animation: fade-in 0.3s ease-out backwards;
+}
+
+.container > :nth-child(1) { animation-delay: 0s; }
+.container > :nth-child(2) { animation-delay: 0.1s; }
+.container > :nth-child(3) { animation-delay: 0.2s; }
+.container > :nth-child(4) { animation-delay: 0.3s; }
 
 h1 {
     color: var(--text);
@@ -88,25 +111,20 @@ a:hover {
 
 
 .animated-link {
-    position: relative;
-}
-
-.animated-link:after {
-    content: "";
-    position: absolute;
-    background: white;
-    height: 0.5px;
-    width: 100%;
-    left: 0;
-    bottom: -2px;
+    text-decoration: none;
+    box-shadow: inset 0 -1px 0 0 white;
 }
 
 .animated-link:hover {
     text-decoration: none;
+    animation: refill 0.4s ease;
 }
 
-.animated-link:hover:after {
-    animation: refill 0.4s ease;
+@keyframes refill {
+    0% { box-shadow: inset 0 -1px 0 0 white; }
+    50% { box-shadow: inset 0 -1px 0 0 transparent; }
+    50.1% { box-shadow: inset 0 -1px 0 0 transparent; }
+    100% { box-shadow: inset 0 -1px 0 0 white; }
 }
 
 section {
@@ -162,28 +180,6 @@ section {
 
 .with-arrow:hover::after {
     transform: translate(2px, -2px);
-}
-
-
-
-
-@keyframes refill {
-    0% {
-        width: 100%;
-        left: 0;
-    }
-    50% {
-        width: 0;
-        left: 100%;
-    }
-    50.1% {
-        width: 0;
-        left: 0;
-    }
-    100% {
-        width: 100%;
-        left: 0;
-    }
 }
 
 .contact-header {
