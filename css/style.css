@@ -52,7 +52,7 @@ body {
     from {
         opacity: 0;
         filter: blur(6px);
-        transform: scale(1.08);
+        transform: scale(1.1);
     }
     to {
         opacity: 1;

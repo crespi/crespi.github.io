@@ -6,7 +6,7 @@
     const DEFAULT_CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     const GRID_WORD = 'hello ';
     const WORD_SPACING = -1.5; // matches CSS word-spacing
-    const VERTICAL_OFFSET = 2; // tweak this to adjust vertical alignment (positive = down, negative = up)
+    const VERTICAL_OFFSET = 6; // tweak this to adjust vertical alignment (positive = down, negative = up)
 
     let CELL_WIDTH = 10; // will be measured dynamically
     let CELL_HEIGHT = 26; // will be measured dynamically
@@ -44,7 +44,6 @@
         heightDiv.remove();
     }
 
-    let elements = [];       // Elements we've modified
     let overlayChars = [];   // Overlay character spans
     let gridCells = [];      // Background grid cells
     let gridContainer = null;
@@ -201,7 +200,6 @@
         `;
 
         const textNodes = getTextNodes(container);
-        elements = [];
         overlayChars = [];
 
         textNodes.forEach(textNode => {
@@ -267,13 +265,9 @@
                     y: rect.top + rect.height / 2,
                     original: char,
                     originalSpan: span,
-                    isSpace: isSpace,
-                    scrambled: false
+                    isSpace: isSpace
                 });
             });
-
-            // Store reference to measuring wrapper and spans
-            elements.push({ wrapper: measuringWrapper, text, charSpans });
         });
 
         document.body.appendChild(overlayContainer);
