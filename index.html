@@ -99,6 +99,9 @@
             `Thanks for stopping by!`
         ];
 
+        const effects = ['ripple', 'hello-wipe'];
+        let effectIndex = 0;
+
         btn.addEventListener('click', (e) => {
             btn.disabled = true;
             btn.classList.add('anticipate-charge');
@@ -114,8 +117,8 @@
             const y = rect.top + rect.height / 2;
             setTimeout(() => {
                 if (window.TextScramble) {
-                    const effects = ['ripple', 'hello-wipe'];
-                    const effect = effects[Math.floor(Math.random() * effects.length)];
+                    const effect = effects[effectIndex % effects.length];
+                    effectIndex++;
                     window.TextScramble.trigger(effect, x, y, () => {
                         // Reset button when animation completes
                         btn.disabled = false;
