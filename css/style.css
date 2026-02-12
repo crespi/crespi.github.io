@@ -47,6 +47,10 @@ body {
     letter-spacing: -0.2px;
 }
 
+ul, li{
+    color: var(--text-muted);
+}
+
 /* Initial load animation */
 @keyframes fade-in {
     from {
