@@ -5,8 +5,6 @@
     const MESSAGE = 'HELLO hii';
     const FONT_WEIGHT = 900;
     const FONT_FAMILY = 'system-ui, -apple-system, sans-serif';
-    const Y_POSITION = 270; // vertical position of text
-
     let letterMask = null;
     let maskWidth = 0;
     let maskHeight = 0;
@@ -21,20 +19,30 @@
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
-        // Measure text width
+        // Measure text dimensions
         ctx.font = font;
-        textWidth = ctx.measureText(MESSAGE).width;
+        const metrics = ctx.measureText(MESSAGE);
+        textWidth = metrics.width;
+        const ascent = metrics.actualBoundingBoxAscent;
+        const descent = metrics.actualBoundingBoxDescent;
+        const textHeight = ascent + descent;
+
+        // Calculate vertical scale to fill viewport height
+        const scaleY = height / textHeight;
 
         // Size canvas to fit text
         canvas.width = Math.ceil(textWidth) + 20;
         canvas.height = height;
 
-        // Render text
+        // Render text stretched vertically to fill the screen
+        ctx.save();
+        ctx.scale(1, scaleY);
         ctx.fillStyle = 'white';
         ctx.font = font;
         ctx.textAlign = 'left';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(MESSAGE, 10, Y_POSITION);
+        ctx.textBaseline = 'alphabetic';
+        ctx.fillText(MESSAGE, 10, ascent);
+        ctx.restore();
 
         // Store pixel data for hit testing
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);

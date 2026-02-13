@@ -291,6 +291,7 @@
         // Reset grid cell opacities
         gridCells.forEach(cell => {
             cell.span.style.opacity = 0;
+            cell.wasActive = false;
         });
 
         // Reset overlay
@@ -300,6 +301,8 @@
             data.span.textContent = data.original;
             data.originalSpan.style.opacity = 1;
             data.lastChange = null;
+            data.wasActive = false;
+            data.enteredAt = null;
         });
 
         // Hide containers
@@ -332,38 +335,52 @@
         }
 
         const charset = currentEffect.charset || DEFAULT_CHARSET;
+        const scrambleWindow = currentEffect.scrambleWindow || 150;
 
-        // Update background grid
+        // Update background grid — only touch DOM on state transitions
         gridCells.forEach(cell => {
             const intensity = currentEffect.getIntensity
                 ? currentEffect.getIntensity(cell.x, cell.y, origin.x, origin.y, elapsed, currentEffect.duration)
                 : (currentEffect.isActive(cell.x, cell.y, origin.x, origin.y, elapsed, currentEffect.duration) ? 1 : 0);
-            cell.span.style.opacity = intensity;
+            const active = intensity > 0;
+            if (active !== cell.wasActive) {
+                cell.span.style.opacity = active ? intensity : 0;
+                cell.wasActive = active;
+            }
         });
 
-        // Update overlay characters
+        // Update overlay characters — scramble briefly on enter, then freeze
         overlayChars.forEach(data => {
             const intensity = currentEffect.getIntensity
                 ? currentEffect.getIntensity(data.x, data.y, origin.x, origin.y, elapsed, currentEffect.duration)
                 : (currentEffect.isActive(data.x, data.y, origin.x, origin.y, elapsed, currentEffect.duration) ? 1 : 0);
+            const active = intensity > 0;
 
-            if (intensity > 0) {
-                // Show overlay, hide original
-                data.span.style.opacity = intensity;
+            if (active && !data.wasActive) {
+                // Just entered zone — show overlay, set initial random char
+                data.span.style.opacity = 1;
                 data.span.style.background = 'var(--background, #070B0E)';
-                // Scramble non-space characters, keep spaces as spaces
-                // Only change character every ~50ms for readable shuffle
-                if (!data.isSpace && (!data.lastChange || elapsed - data.lastChange > 50)) {
+                data.originalSpan.style.opacity = 0;
+                data.wasActive = true;
+                data.enteredAt = elapsed;
+                if (!data.isSpace) {
                     data.span.textContent = randomChar(charset);
                     data.lastChange = elapsed;
                 }
-                data.originalSpan.style.opacity = 1 - intensity;
-            } else {
-                // Hide overlay, show original
-                data.span.style.opacity = '0';
+            } else if (active && !data.isSpace && elapsed - data.enteredAt < scrambleWindow) {
+                // Still within scramble window — keep flickering
+                if (elapsed - data.lastChange > 50) {
+                    data.span.textContent = randomChar(charset);
+                    data.lastChange = elapsed;
+                }
+            } else if (!active && data.wasActive) {
+                // Just left zone — restore original
+                data.span.style.opacity = 0;
                 data.span.style.background = 'transparent';
-                data.originalSpan.style.opacity = '1';
+                data.originalSpan.style.opacity = 1;
+                data.wasActive = false;
             }
+            // Active past scramble window or still inactive: no DOM writes
         });
 
         requestAnimationFrame(animate);
