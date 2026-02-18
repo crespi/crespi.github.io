@@ -362,13 +362,12 @@
                 data.span.style.background = 'var(--background, #070B0E)';
                 data.originalSpan.style.opacity = 0;
                 data.wasActive = true;
-                data.enteredAt = elapsed;
                 if (!data.isSpace) {
                     data.span.textContent = randomChar(charset);
                     data.lastChange = elapsed;
                 }
-            } else if (active && !data.isSpace && elapsed - data.enteredAt < scrambleWindow) {
-                // Still within scramble window — keep flickering
+            } else if (active && !data.isSpace) {
+                // Still in zone — keep flickering
                 if (elapsed - data.lastChange > 50) {
                     data.span.textContent = randomChar(charset);
                     data.lastChange = elapsed;
@@ -448,11 +447,17 @@
         init();
     }
 
+    // Get duration of a registered effect (in ms)
+    function getEffectDuration(name) {
+        return effects[name] ? effects[name].duration : 0;
+    }
+
     // Expose API
     window.TextScramble = {
         registerEffect,
         trigger: triggerEffect,
         prepare, // call during delay before trigger
-        init // expose for manual init if needed
+        init, // expose for manual init if needed
+        getEffectDuration
     };
 })();

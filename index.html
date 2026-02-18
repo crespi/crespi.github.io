@@ -25,7 +25,7 @@
             <h1>Francisco Crespi</h1>
             <div class="contact-header">
                 <p class="text-muted">Product designer specialized in design systems</p>
-                <button id="say-hi-btn">Say hello</button>
+                <button id="say-hi-btn"><span class="btn-text">Say hello</span></button>
             </div>
 
         </header>
@@ -102,6 +102,35 @@
         const effects = ['ripple', 'hello-wipe'];
         let effectIndex = 0;
 
+        const btnText = btn.querySelector('.btn-text');
+        function swapBtnText(text) {
+            // Lock current width so it can transition
+            const oldWidth = btn.offsetWidth;
+            btn.style.width = oldWidth + 'px';
+
+            btnText.classList.add('text-blur');
+            setTimeout(() => {
+                // Swap text while blurred
+                btnText.textContent = text;
+
+                // Measure new natural width: temporarily remove width lock
+                btn.style.width = 'auto';
+                const newWidth = btn.offsetWidth;
+
+                // Snap back to old width, then animate to new
+                btn.style.transition = 'none';
+                btn.style.width = oldWidth + 'px';
+                btn.offsetWidth; // force reflow
+                btn.style.transition = '';
+                btn.style.width = newWidth + 'px';
+
+                btnText.classList.remove('text-blur');
+
+                // Remove explicit width after transition completes
+                setTimeout(() => { btn.style.width = ''; }, 250);
+            }, 200);
+        }
+
         btn.addEventListener('click', (e) => {
             btn.disabled = true;
             btn.classList.add('anticipate-charge');
@@ -119,11 +148,15 @@
                 if (window.TextScramble) {
                     const effect = effects[effectIndex % effects.length];
                     effectIndex++;
+                    const duration = window.TextScramble.getEffectDuration(effect);
+                    btn.style.setProperty('--effect-duration', duration + 'ms');
+                    btn.classList.add('effect-active');
                     window.TextScramble.trigger(effect, x, y, () => {
                         // Reset button when animation completes
+                        btn.classList.remove('effect-active');
                         btn.disabled = false;
                         btn.classList.remove('anticipate-charge');
-                        btn.textContent = 'Say hello';
+                        swapBtnText('Say hello');
                     });
                 }
             }, 1000);
@@ -133,7 +166,7 @@
                 .then(data => {
                     const msgList = messages(data.count);
                     const randomMessage = msgList[Math.floor(Math.random() * msgList.length)];
-                    btn.textContent = randomMessage;
+                    swapBtnText(randomMessage);
                 });
         });
     </script>

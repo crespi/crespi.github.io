@@ -209,9 +209,41 @@ section {
     padding: 6px 10px;
     cursor: pointer;
     border-radius: 8px;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease, width 0.2s ease;
     z-index: 100;
     font-size: 15px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#say-hi-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(to right, var(--blue-gray-800) calc(100% - 16px), var(--blue-gray-600) 100%);
+    z-index: -1;
+}
+
+#say-hi-btn.effect-active::after {
+    animation: btn-progress var(--effect-duration, 5s) linear forwards;
+}
+
+@keyframes btn-progress {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+#say-hi-btn .btn-text {
+    transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+#say-hi-btn .btn-text.text-blur {
+    opacity: 0;
+    filter: blur(4px);
 }
 
 #say-hi-btn:hover {
