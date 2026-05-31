@@ -335,7 +335,6 @@
         }
 
         const charset = currentEffect.charset || DEFAULT_CHARSET;
-        const scrambleWindow = currentEffect.scrambleWindow || 150;
 
         // Update background grid — only touch DOM on state transitions
         gridCells.forEach(cell => {

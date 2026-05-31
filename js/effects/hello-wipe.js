@@ -84,6 +84,8 @@
         }
     };
 
+    window.addEventListener('resize', () => { letterMask = null; });
+
     if (window.TextScramble) {
         window.TextScramble.registerEffect('hello-wipe', helloWipeEffect);
     }
