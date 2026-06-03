@@ -67,7 +67,7 @@ ul, li{
 }
 
 .container {
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
     padding: calc(var(--line-unit) * 5) 24px calc(var(--line-unit) * 4) 24px;
 }
