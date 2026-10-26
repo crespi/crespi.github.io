@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude plugin:*)",
+      "Bash(npx:*)",
+      "Bash(cat ~/.claude/plugins/marketplaces/claude-plugins-official/plugins/code-simplifier/agents/*.md)",
+      "Bash(find ~/.claude/plugins/cache -name *.md)"
+    ]
+  }
+}

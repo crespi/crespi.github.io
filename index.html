@@ -57,7 +57,7 @@
                     <span class="experience-year">2020 – 2025</span>
                 </div>
                 <p class="experience-description">
-                    Designed a fleet management dashboard and design system for <a target="_blank" class="animated-link" href="https://www.getfairway.com/">Fairway.</a> Designed and helped launch <a target="_blank" class="animated-link" href="https://studios.decentraland.org/">Decentraland Studios,</a> a community-funded marketplace connecting brands with metaverse creators. 150+ studios onboarded, $50k+ in revenue generated. Mentored 40+ UI/UX design students at <a target="_blank" class="animated-link" href="https://careerfoundry.com">CareerFoundry</a> with a 4.9/5 satisfaction rating. Wrote their "Introduction to Product Design" course. Designed and launched websites for <a target="_blank" class="animated-link" href="https://www.behance.net/gallery/148962559/Nethermindio-Website-Redesign">Nethermind</a> and <a target="_blank" class="animated-link" href="https://www.behance.net/gallery/199126591/Cairo-Website-Redesign">Starkware.</a>
+                    Designed a fleet management dashboard and design system for <a target="_blank" class="animated-link" href="https://www.getfairway.com/">Fairway</a>. Designed and helped launch <a target="_blank" class="animated-link" href="https://studios.decentraland.org/">Decentraland Studios</a>, a community-funded marketplace connecting brands with metaverse creators. 150+ studios onboarded, $50k+ in revenue generated. Mentored 40+ UI/UX design students at <a target="_blank" class="animated-link" href="https://careerfoundry.com">CareerFoundry</a> with a 4.9/5 satisfaction rating. Wrote their “Introduction to Product Design” course. Designed and launched websites for <a target="_blank" class="animated-link" href="https://www.behance.net/gallery/148962559/Nethermindio-Website-Redesign">Nethermind</a> and <a target="_blank" class="animated-link" href="https://www.behance.net/gallery/199126591/Cairo-Website-Redesign">Starkware</a>.
                 </p>
             </div>
 
@@ -73,7 +73,7 @@
 
         <section id="about">
             <h2>About</h2>
-            <p>I'm based in Barcelona. In my free time I am probably swimming in open waters or VJing under the name of <a href="https://instagram.com/crespivis" class="animated-link">Crespivis.</a> I hold an MSc. in Cognitive Systems and Interactive Media at Universitat Pompeu Fabra.</p>
+            <p>I’m based in Barcelona. In my free time I am probably swimming in open waters or VJing under the name of <a href="https://instagram.com/crespivis" class="animated-link">Crespivis</a>. I hold an MSc. in Cognitive Systems and Interactive Media at Universitat Pompeu Fabra.</p>
         </section>
 
         <section id="contact">
@@ -99,6 +99,7 @@
             `Thanks for stopping by!`
         ];
 
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         const effects = ['ripple', 'hello-wipe'];
         let effectIndex = 0;
         let fetchedMessage = null;
@@ -146,21 +147,27 @@
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
             setTimeout(() => {
-                if (window.TextScramble) {
-                    const effect = effects[effectIndex % effects.length];
-                    effectIndex++;
-                    const duration = window.TextScramble.getEffectDuration(effect);
-                    btn.style.setProperty('--effect-duration', duration + 'ms');
-                    btn.classList.add('effect-active');
-                    window.TextScramble.trigger(effect, x, y, () => {
-                        // Reset button when animation completes
-                        btn.classList.remove('effect-active');
-                        btn.disabled = false;
-                        btn.classList.remove('anticipate-charge');
-                        swapBtnText(fetchedMessage || 'Say hello');
-                        fetchedMessage = null;
-                    });
+                // Reset button when animation completes
+                const finish = () => {
+                    btn.classList.remove('effect-active');
+                    btn.disabled = false;
+                    btn.classList.remove('anticipate-charge');
+                    swapBtnText(fetchedMessage || 'Say hello');
+                    fetchedMessage = null;
+                };
+
+                // Skip the full-screen scramble under reduced motion; only the label changes
+                if (!window.TextScramble || reduceMotion.matches) {
+                    finish();
+                    return;
                 }
+
+                const effect = effects[effectIndex % effects.length];
+                effectIndex++;
+                const duration = window.TextScramble.getEffectDuration(effect);
+                btn.style.setProperty('--effect-duration', duration + 'ms');
+                btn.classList.add('effect-active');
+                window.TextScramble.trigger(effect, x, y, finish);
             }, 1000);
 
             fetch(WORKER_URL, { method: 'POST' })

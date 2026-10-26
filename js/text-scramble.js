@@ -5,7 +5,7 @@
 (function() {
     const DEFAULT_CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     const GRID_WORD = 'hello ';
-    const WORD_SPACING = -1.5; // matches CSS word-spacing
+    let WORD_SPACING = -1.5; // will be read from body's computed word-spacing
     const VERTICAL_OFFSET = 6; // tweak this to adjust vertical alignment (positive = down, negative = up)
 
     let CELL_WIDTH = 10; // will be measured dynamically
@@ -14,12 +14,12 @@
 
     // Measure actual character dimensions from the page's font
     function measureCharDimensions() {
-        // Measure width (including letter-spacing)
+        WORD_SPACING = parseFloat(getComputedStyle(document.body).wordSpacing) || 0;
+
+        // Measure width (font-size and letter-spacing inherit from body)
         const widthSpan = document.createElement('span');
         widthSpan.style.cssText = `
             font-family: var(--font-mono, ui-monospace, monospace);
-            font-size: 15px;
-            letter-spacing: -0.2px;
             position: absolute;
             visibility: hidden;
         `;
@@ -32,7 +32,6 @@
         const heightDiv = document.createElement('div');
         heightDiv.style.cssText = `
             font-family: var(--font-mono, ui-monospace, monospace);
-            font-size: 15px;
             line-height: var(--line-unit, 26px);
             position: absolute;
             visibility: hidden;
@@ -91,10 +90,7 @@
             z-index: -1;
             overflow: hidden;
             font-family: var(--font-mono, monospace);
-            font-size: 15px;
             line-height: ${CELL_HEIGHT}px;
-            letter-spacing: -0.2px;
-            word-spacing: -1.5px;
             color: var(--text, #fff);
             display: none;
         `;
@@ -195,7 +191,6 @@
             pointer-events: none;
             z-index: 1000;
             font-family: var(--font-mono, monospace);
-            font-size: 15px;
             display: none;
         `;
 

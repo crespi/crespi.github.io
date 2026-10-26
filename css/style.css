@@ -1,6 +1,6 @@
 :root {
     --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-    --line-unit: 26px;
+    --line-unit: 1.7333rem; /* 26px at the default 15px root */
     --background: var(--blue-gray-1100);
     --text: var(--blue-gray-0);
     --text-muted: var(--blue-gray-200);
@@ -35,17 +35,23 @@
 
 html {
     font-family: var(--font-mono);
-    font-size: 15px;
-    scroll-behavior: smooth;
+    font-size: 0.9375rem; /* 15px at the default 16px browser size */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
 }
 
 body {
     background: var(--background);
     color: var(--text);
     line-height: var(--line-unit);
-    word-spacing: -1.5px;
-    letter-spacing: -0.2px;
+    word-spacing: -0.1em;
+    letter-spacing: -0.0133em;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 ul, li{
@@ -56,14 +62,20 @@ ul, li{
 @keyframes fade-in {
     from {
         opacity: 0;
-        filter: blur(6px);
-        transform: scale(1.1);
+        filter: blur(4px);
+        transform: translateY(12px);
     }
     to {
         opacity: 1;
         filter: none;
         transform: none;
     }
+}
+
+/* Reduced-motion fallback: opacity only */
+@keyframes fade-in-opacity {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .container {
@@ -73,7 +85,13 @@ ul, li{
 }
 
 .container > * {
-    animation: fade-in 0.3s ease-out backwards;
+    animation: fade-in-opacity 0.3s ease-out both;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .container > * {
+        animation-name: fade-in;
+    }
 }
 
 .container > :nth-child(1) { animation-delay: 0s; }
@@ -83,16 +101,16 @@ ul, li{
 
 h1 {
     color: var(--text);
-    font-size: 15px;
-    font-weight: 900;
+    font-size: 1rem;
+    font-weight: 700;
     line-height: var(--line-unit);
     text-wrap: balance;
 }
 
 h2 {
-    color: var(--text);
-    font-size: 15px;
-    font-weight: 900;
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 700;
     line-height: var(--line-unit);
     margin-bottom: calc(var(--line-unit) * 1);
     text-wrap: balance;
@@ -104,7 +122,7 @@ h2 {
 
 p {
     color: var(--text-muted);
-    text-wrap: balance;
+    text-wrap: pretty;
 }
 
 a {
@@ -112,26 +130,36 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: underline;
+@media (hover: hover) {
+    a:hover {
+        text-decoration: underline;
+        text-underline-position: from-font;
+        text-decoration-thickness: from-font;
+    }
 }
 
 
+/* Underline drawn as a 3-part strip (line, gap, line); hover slides the gap
+   through so the underline drains and refills, and reverses mid-flight */
 .animated-link {
     text-decoration: none;
-    box-shadow: inset 0 -1px 0 0 white;
+    background-image: linear-gradient(to right, currentColor 33.33%, transparent 33.33% 66.67%, currentColor 66.67%);
+    background-repeat: no-repeat;
+    background-size: 300% 1px;
+    background-position: 0% 100%;
 }
 
-.animated-link:hover {
-    text-decoration: none;
-    animation: refill 0.4s ease;
+@media (prefers-reduced-motion: no-preference) {
+    .animated-link {
+        transition: background-position 0.4s ease;
+    }
 }
 
-@keyframes refill {
-    0% { box-shadow: inset 0 -1px 0 0 white; }
-    50% { box-shadow: inset 0 -1px 0 0 transparent; }
-    50.1% { box-shadow: inset 0 -1px 0 0 transparent; }
-    100% { box-shadow: inset 0 -1px 0 0 white; }
+@media (hover: hover) {
+    .animated-link:hover {
+        text-decoration: none;
+        background-position: 100% 100%;
+    }
 }
 
 section {
@@ -179,15 +207,27 @@ section {
     height: 18px;
     margin-left: 4px;
     vertical-align: middle;
-    background-image: url('../img/arrow-up-right.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    transition: transform 0.2s ease;
-    transition-delay: 0.4s;
+    background-color: var(--text-muted);
+    /* Inlined so the mask isn't blocked as a cross-origin image (e.g. on file://) */
+    --arrow-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.33' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.667 11.333 11.334 4.667M4.667 4.667h6.667v6.666'/%3E%3C/svg%3E");
+    -webkit-mask: var(--arrow-icon) center / contain no-repeat;
+    mask: var(--arrow-icon) center / contain no-repeat;
+    transition: transform 150ms ease-out;
 }
 
-.with-arrow:hover::after {
-    transform: translate(2px, -2px);
+@media (forced-colors: active) {
+    .with-arrow::after {
+        background-color: CanvasText;
+        forced-color-adjust: none;
+    }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    /* Delay only on the way in, so the nudge follows the underline refill */
+    .with-arrow:hover::after {
+        transform: translate(2px, -2px);
+        transition-delay: 0.4s;
+    }
 }
 
 .contact-header {
@@ -196,6 +236,10 @@ section {
     align-items: center;
     margin-bottom: calc(var(--line-unit) * 1);
 
+}
+
+.contact-header p {
+    text-wrap: balance;
 }
 
 .say-hi {
@@ -213,9 +257,12 @@ section {
     padding: 6px 10px;
     cursor: pointer;
     border-radius: 8px;
-    transition: opacity 0.2s ease, width 0.2s ease;
+    transition: opacity 150ms ease-out, width 0.2s ease, scale 150ms ease-out;
+    -webkit-tap-highlight-color: transparent;
     z-index: 100;
-    font-size: 15px;
+    font-size: 1rem;
+    letter-spacing: inherit;
+    word-spacing: inherit;
     position: relative;
     overflow: hidden;
     white-space: nowrap;
@@ -226,8 +273,9 @@ section {
     position: absolute;
     top: 0;
     left: 0;
-    width: 0;
+    width: 100%;
     height: 100%;
+    translate: -100% 0;
     background: linear-gradient(to right, var(--blue-gray-800) calc(100% - 16px), var(--blue-gray-600) 100%);
     z-index: -1;
 }
@@ -237,8 +285,8 @@ section {
 }
 
 @keyframes btn-progress {
-    from { width: 0%; }
-    to { width: 100%; }
+    from { translate: -100% 0; }
+    to { translate: 0 0; }
 }
 
 #say-hi-btn .btn-text {
@@ -247,11 +295,22 @@ section {
 
 #say-hi-btn .btn-text.text-blur {
     opacity: 0;
-    filter: blur(4px);
 }
 
-#say-hi-btn:hover {
-    opacity: 0.85;
+@media (prefers-reduced-motion: no-preference) {
+    #say-hi-btn .btn-text.text-blur {
+        filter: blur(4px);
+    }
+
+    #say-hi-btn:not(:disabled):active {
+        scale: 0.96;
+    }
+}
+
+@media (hover: hover) {
+    #say-hi-btn:not(:disabled):hover {
+        opacity: 0.85;
+    }
 }
 
 #say-hi-btn:disabled {
